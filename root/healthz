@@ -1,0 +1,8 @@
+#!/bin/sh
+# Daemonless healthcheck for SparkyFitness
+# Check nginx (frontend) responds on port 3004
+if fetch -qo /dev/null "http://127.0.0.1:3004" >/dev/null 2>&1; then
+    exit 0
+else
+    exit 1
+fi

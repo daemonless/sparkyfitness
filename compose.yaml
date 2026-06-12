@@ -1,0 +1,94 @@
+name: sparkyfitness
+
+x-daemonless:
+  title: "SparkyFitness"
+  icon: ":material-heart-pulse:"
+  category: "Health & Fitness"
+  description: "Self-hosted privacy-first fitness tracker on FreeBSD."
+  upstream_url: "https://github.com/CodeWithCJ/SparkyFitness"
+  web_url: "https://github.com/CodeWithCJ/SparkyFitness"
+  user: "bsd"
+  mlock: false
+  appjail: true
+
+  docs:
+    env:
+      PUID: "User ID for the application process"
+      PGID: "Group ID for the application process"
+      TZ: "Timezone for the container"
+      SPARKY_FITNESS_DB_NAME: "PostgreSQL database name"
+      SPARKY_FITNESS_DB_USER: "PostgreSQL superuser"
+      SPARKY_FITNESS_DB_PASSWORD: "PostgreSQL password (from secrets.env)"
+      SPARKY_FITNESS_API_ENCRYPTION_KEY: "64-char hex encryption key (from secrets.env)"
+      BETTER_AUTH_SECRET: "Auth session signing secret (from secrets.env)"
+      SPARKY_FITNESS_FRONTEND_URL: "Public URL of the frontend for CORS"
+      NODE_ENV: "Node runtime mode; leave as 'production'"
+      SPARKY_FITNESS_DB_HOST: "PostgreSQL host the backend connects to; leave as 127.0.0.1 (host networking)"
+      SPARKY_FITNESS_DB_PORT: "PostgreSQL port; MUST match the sidecar's POSTGRES_PORT. Default 5433 (NOT 5432) so this can coexist with another host-networked Postgres (e.g. Immich on 5432) on the same host. ⚠ With network_mode: host, two Postgres on the same port silently collide — keep each service on a distinct port. NOTE: this only takes effect if the daemonless/postgres image honors POSTGRES_PORT (see project README / upstream fix); otherwise the sidecar falls back to 5432."
+      SPARKY_FITNESS_APP_DB_USER: "Limited app DB role the backend creates during migrations (from secrets)"
+      SPARKY_FITNESS_APP_DB_PASSWORD: "Password for the limited app DB role (from secrets)"
+      SPARKY_FITNESS_SERVER_HOST: "Internal bind address for the node backend; leave as 127.0.0.1 (nginx proxies to it)"
+      SPARKY_FITNESS_SERVER_PORT: "Internal node backend port; leave as default"
+      SPARKY_FITNESS_LOG_LEVEL: "Backend log verbosity (e.g. ERROR, INFO, DEBUG)"
+    volumes:
+      /uploads: "User-uploaded files (profile pictures, exercise images)"
+      /backups: "Server backup data"
+    ports:
+      3004: "Web UI (nginx reverse proxy)"
+
+services:
+  sparkyfitness:
+    image: ghcr.io/daemonless/sparkyfitness:latest
+    container_name: sparkyfitness
+    restart: unless-stopped
+    network_mode: host
+    depends_on:
+      - sparkyfitness-db
+
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=${TZ}
+      - NODE_ENV=production
+      - SPARKY_FITNESS_DB_HOST=127.0.0.1
+      - SPARKY_FITNESS_DB_PORT=5433
+      - SPARKY_FITNESS_DB_NAME=${SPARKY_FITNESS_DB_NAME}
+      - SPARKY_FITNESS_DB_USER=${SPARKY_FITNESS_DB_USER}
+      - SPARKY_FITNESS_DB_PASSWORD=${SPARKY_FITNESS_DB_PASSWORD}
+      - SPARKY_FITNESS_APP_DB_USER=${SPARKY_FITNESS_APP_DB_USER}
+      - SPARKY_FITNESS_APP_DB_PASSWORD=${SPARKY_FITNESS_APP_DB_PASSWORD}
+      - SPARKY_FITNESS_API_ENCRYPTION_KEY=${SPARKY_FITNESS_API_ENCRYPTION_KEY}
+      - BETTER_AUTH_SECRET=${BETTER_AUTH_SECRET}
+      - SPARKY_FITNESS_FRONTEND_URL=${SPARKY_FITNESS_FRONTEND_URL}
+      - SPARKY_FITNESS_SERVER_HOST=127.0.0.1
+      - SPARKY_FITNESS_SERVER_PORT=3010
+      - SPARKY_FITNESS_LOG_LEVEL=ERROR
+
+    volumes:
+      - ./uploads:/uploads
+      - ./backups:/backups
+
+  sparkyfitness-db:
+    image: ghcr.io/daemonless/postgres:17
+    container_name: sparkyfitness-db
+    restart: unless-stopped
+    network_mode: host
+
+    annotations:
+      org.freebsd.jail.allow.sysvipc: "true"
+
+    # Generic daemonless PostgreSQL 17 image. Only the superuser role + database
+    # are provisioned here; the SparkyFitness backend creates its own limited
+    # app role (SPARKY_FITNESS_APP_DB_USER) during migrations.
+    environment:
+      - POSTGRES_DB=${SPARKY_FITNESS_DB_NAME}
+      - POSTGRES_USER=${SPARKY_FITNESS_DB_USER}
+      - POSTGRES_PASSWORD=${SPARKY_FITNESS_DB_PASSWORD}
+      # Distinct port (NOT 5432) so this can run alongside another host-networked Postgres
+      # (e.g. Immich on 5432) without colliding. ⚠ Requires the daemonless/postgres image to
+      # honor POSTGRES_PORT — if it doesn't, it falls back to 5432 and WILL collide. Two
+      # host-net Postgres must never share a port.
+      - POSTGRES_PORT=5433
+
+    volumes:
+      - ./postgres:/var/lib/postgresql/data

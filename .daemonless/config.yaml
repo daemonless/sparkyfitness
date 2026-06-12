@@ -1,0 +1,21 @@
+# dbuild configuration file
+# Place in .daemonless/config.yaml or .dbuild.yaml (higher priority)
+#
+# Full reference: https://github.com/daemonless/dbuild
+
+build:
+  variants:
+    - tag: latest
+      containerfile: Containerfile
+      default: true
+
+cit:
+  mode: screenshot
+  port: 3004
+  health: /api/health
+  ready: "SparkyFitnessServer listening on port"
+  screenshot_wait: 5
+  compose: true
+  wait: 180
+  puid: false
+

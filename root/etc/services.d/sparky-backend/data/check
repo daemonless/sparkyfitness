@@ -1,0 +1,5 @@
+#!/bin/sh
+# s6-notifyoncheck readiness probe for the SparkyFitness node backend.
+# The backend listens on 127.0.0.1:${SPARKY_FITNESS_SERVER_PORT:-3010}; /api/health
+# returns {"status":"UP"} once node is up and the Postgres connection is live.
+exec fetch -qo /dev/null "http://127.0.0.1:${SPARKY_FITNESS_SERVER_PORT:-3010}/api/health"

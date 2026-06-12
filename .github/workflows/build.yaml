@@ -1,0 +1,18 @@
+name: Build FreeBSD Container
+
+on:
+  push:
+    branches: [main]
+    paths-ignore: ['*.md', 'LICENSE', '.gitignore']
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build:
+    uses: daemonless/dbuild/.github/workflows/daemonless-build.yaml@main
+    permissions:
+      packages: write
+    with:
+      image_name: sparkyfitness
+    secrets: inherit

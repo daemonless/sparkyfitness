@@ -1,0 +1,7 @@
+#!/bin/sh
+echo "[init] Initializing SparkyFitness..."
+
+mkdir -p /uploads /backups
+chown -R bsd:bsd /uploads /backups
+
+echo "[init] Done"
