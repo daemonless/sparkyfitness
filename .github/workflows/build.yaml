@@ -11,8 +11,6 @@ on:
 jobs:
   build:
     uses: daemonless/dbuild/.github/workflows/daemonless-build.yaml@main
-    permissions:
-      packages: write
     with:
       image_name: sparkyfitness
     secrets: inherit
