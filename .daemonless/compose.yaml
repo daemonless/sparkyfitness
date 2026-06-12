@@ -11,6 +11,7 @@ services:
       POSTGRES_DB: sparkyfitness
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: testpass
+      POSTGRES_PORT: "5434"
 
   sparkyfitness:
     image: ghcr.io/daemonless/sparkyfitness:build
@@ -18,7 +19,7 @@ services:
     environment:
       NODE_ENV: production
       SPARKY_FITNESS_DB_HOST: 127.0.0.1
-      SPARKY_FITNESS_DB_PORT: 5432
+      SPARKY_FITNESS_DB_PORT: 5434
       SPARKY_FITNESS_DB_NAME: sparkyfitness
       SPARKY_FITNESS_DB_USER: postgres
       SPARKY_FITNESS_DB_PASSWORD: testpass
