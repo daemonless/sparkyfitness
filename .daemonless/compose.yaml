@@ -1,0 +1,34 @@
+# CIT test compose — hardcoded test credentials, safe for CI only
+name: sparkyfitness-test
+
+services:
+  sparkyfitness-db:
+    image: ghcr.io/daemonless/postgres:17
+    network_mode: host
+    annotations:
+      org.freebsd.jail.allow.sysvipc: "true"
+    environment:
+      POSTGRES_DB: sparkyfitness
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: testpass
+
+  sparkyfitness:
+    image: ghcr.io/daemonless/sparkyfitness:build
+    network_mode: host
+    environment:
+      NODE_ENV: production
+      SPARKY_FITNESS_DB_HOST: 127.0.0.1
+      SPARKY_FITNESS_DB_PORT: 5432
+      SPARKY_FITNESS_DB_NAME: sparkyfitness
+      SPARKY_FITNESS_DB_USER: postgres
+      SPARKY_FITNESS_DB_PASSWORD: testpass
+      SPARKY_FITNESS_APP_DB_USER: sparkyapp
+      SPARKY_FITNESS_APP_DB_PASSWORD: testpass
+      SPARKY_FITNESS_API_ENCRYPTION_KEY: a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2
+      BETTER_AUTH_SECRET: cit-test-secret-not-for-production
+      SPARKY_FITNESS_FRONTEND_URL: http://127.0.0.1:3004
+      SPARKY_FITNESS_SERVER_HOST: 127.0.0.1
+      SPARKY_FITNESS_SERVER_PORT: 3010
+      SPARKY_FITNESS_LOG_LEVEL: ERROR
+    depends_on:
+      - sparkyfitness-db

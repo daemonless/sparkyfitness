@@ -1,0 +1,121 @@
+# --------------------------------------------------------------------------
+# SparkyFitness — FreeBSD daemonless container
+# Self-hosted, privacy-first fitness tracker
+# --------------------------------------------------------------------------
+
+ARG BASE_VERSION=15
+ARG UPSTREAM_URL="https://api.github.com/repos/CodeWithCJ/SparkyFitness/releases/latest"
+
+# ==========================================================================
+# Stage 1: Builder
+# ==========================================================================
+FROM ghcr.io/daemonless/base:${BASE_VERSION} AS builder
+
+ARG UPSTREAM_URL
+
+# Build dependencies
+RUN pkg update && pkg install -y \
+    node24 npm-node24 corepack \
+    git-lite jq \
+    && pkg clean -ay
+
+# Enable pnpm via corepack
+RUN corepack enable && corepack prepare pnpm@10.33.4 --activate
+
+# Clone latest release
+WORKDIR /build
+RUN --mount=type=secret,id=github_token \
+    GITHUB_TOKEN=$(cat /run/secrets/github_token 2>/dev/null || echo ""); \
+    if [ -n "${GITHUB_TOKEN}" ]; then \
+      export HTTP_AUTH="basic:*:x-access-token:${GITHUB_TOKEN}"; \
+    fi && \
+    VERSION=$(fetch -qo - "${UPSTREAM_URL}" | jq -r '.tag_name') && \
+    echo "Resolved VERSION=$VERSION" && \
+    git clone --depth 1 --branch ${VERSION} \
+      https://github.com/CodeWithCJ/SparkyFitness.git . && \
+    echo "${VERSION}" > /tmp/app_version
+
+# Override pnpm supportedArchitectures — upstream locks to Linux only.
+# FreeBSD needs its own platform-specific binaries (e.g. @esbuild/freebsd-x64).
+RUN printf 'supportedArchitectures.os=current\nsupportedArchitectures.cpu=current\n' > .npmrc
+
+# Install workspace dependencies for frontend + server
+RUN pnpm install --frozen-lockfile \
+    --filter sparkyfitnessfrontend... \
+    --filter sparkyfitnessserver...
+
+# Build frontend (React + Vite)
+RUN pnpm --filter sparkyfitnessfrontend run build
+
+# Deploy server to standalone directory (flat node_modules, no workspace symlinks)
+RUN pnpm --filter=sparkyfitnessserver deploy --legacy /deploy
+
+# Ensure tsx is available in the deployed server
+# (pnpm deploy --legacy may skip devDependencies)
+RUN if [ ! -f /deploy/node_modules/.bin/tsx ]; then \
+      cd /deploy && npm install tsx; \
+    fi
+
+# ==========================================================================
+# Stage 2: Runtime
+# ==========================================================================
+FROM ghcr.io/daemonless/base:${BASE_VERSION}
+
+ARG FREEBSD_ARCH=amd64
+ARG PACKAGES="node24 nginx postgresql17-client"
+ARG UPSTREAM_URL="https://api.github.com/repos/CodeWithCJ/SparkyFitness/releases/latest"
+ARG UPSTREAM_JQ=".tag_name"
+ARG HEALTHCHECK_ENDPOINT="http://localhost:3004"
+
+ENV HEALTHCHECK_URL="${HEALTHCHECK_ENDPOINT}"
+
+LABEL org.opencontainers.image.title="SparkyFitness" \
+      org.opencontainers.image.description="Self-hosted privacy-first fitness tracker on FreeBSD" \
+      org.opencontainers.image.source="https://github.com/daemonless/sparkyfitness" \
+      org.opencontainers.image.url="https://github.com/CodeWithCJ/SparkyFitness" \
+      org.opencontainers.image.version="latest" \
+      org.opencontainers.image.licenses="NOASSERTION" \
+      org.opencontainers.image.vendor="daemonless" \
+      org.opencontainers.image.authors="daemonless" \
+      io.daemonless.category="Utilities" \
+      io.daemonless.port="3004" \
+      io.daemonless.arch="${FREEBSD_ARCH}" \
+      io.daemonless.upstream-url="${UPSTREAM_URL}" \
+      io.daemonless.upstream-jq="${UPSTREAM_JQ}" \
+      io.daemonless.healthcheck-url="${HEALTHCHECK_ENDPOINT}" \
+      io.daemonless.volumes="/uploads,/backups" \
+      io.daemonless.packages="${PACKAGES}"
+
+# Install runtime dependencies
+RUN pkg update && \
+    pkg install -y ${PACKAGES} && \
+    mkdir -p /app/server /app/client /uploads /backups \
+             /var/log/nginx /var/run /var/tmp/nginx && \
+    pkg clean -ay && \
+    rm -rf /var/cache/pkg/* /var/db/pkg/repos/*
+
+# Copy built artifacts from builder
+COPY --from=builder /tmp/app_version /app/version
+COPY --from=builder --chown=bsd:bsd /build/SparkyFitnessFrontend/dist /app/client
+COPY --from=builder --chown=bsd:bsd /deploy /app/server
+
+# Set ownership — /app and /app/client need to be world-readable for nginx worker (www user)
+RUN chown -R bsd:bsd /app /uploads /backups && \
+    chmod o+x /app && \
+    chmod -R o+rX /app/client
+
+# Copy service files (s6 runners, nginx config, healthz)
+COPY root/ /
+RUN chmod +x /etc/services.d/*/run \
+              /etc/services.d/sparky-backend/data/check \
+              /etc/cont-init.d/* \
+              /healthz 2>/dev/null || true
+
+WORKDIR /app
+
+ENV NODE_ENV=production \
+    NODE_OPTIONS="--max-old-space-size=256"
+
+EXPOSE 3004
+
+VOLUME /uploads /backups

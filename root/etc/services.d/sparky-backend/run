@@ -1,0 +1,20 @@
+#!/bin/sh
+# SparkyFitness Node.js backend s6 service.
+# NOTE: do NOT `cd` before s6-notifyoncheck — it requires its cwd to be the service
+# directory so it can reach ./supervise and ./notification-fd; cd'ing first makes it
+# fail with "s6-supervise not running". node cd's into /app/server in its own subshell.
+
+echo "[INFO] Waiting for PostgreSQL..."
+until pg_isready -h "${SPARKY_FITNESS_DB_HOST:-sparky-fitness-db}" \
+                 -p "${SPARKY_FITNESS_DB_PORT:-5432}" -q 2>/dev/null; do
+    sleep 1
+done
+echo "[INFO] PostgreSQL is ready."
+
+echo "[INFO] Starting SparkyFitness backend..."
+# s6-notifyoncheck polls data/check until the backend's /api/health answers, then
+# signals readiness on fd 3 (declared in ./notification-fd) so s6 reports the service
+# "up" only once it's genuinely serving — makes CIT screenshot capture deterministic.
+exec s6-notifyoncheck -3 3 -n 120 -w 1000 \
+    -c /etc/services.d/sparky-backend/data/check \
+    s6-setuidgid bsd sh -c 'cd /app/server && exec /usr/local/bin/node --import tsx index.ts'
