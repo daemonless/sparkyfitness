@@ -1,11 +1,11 @@
 {
-  "generated": "2026-06-12T12:53:03Z",
+  "generated": "2026-06-20T13:23:51Z",
   "image": "sparkyfitness",
   "tags": {
     "latest": {
       "app_version": "v0.16.9",
       "arch": "amd64",
-      "generated": "2026-06-12T12:51:47Z",
+      "generated": "2026-06-20T13:22:33Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
@@ -23,7 +23,7 @@
           },
           {
             "name": "FreeBSD-certctl",
-            "version": "15.0"
+            "version": "15.0p10"
           },
           {
             "name": "FreeBSD-clibs",
@@ -35,15 +35,15 @@
           },
           {
             "name": "FreeBSD-fetch",
-            "version": "15.0"
+            "version": "15.0p10"
           },
           {
             "name": "FreeBSD-kerberos-lib",
-            "version": "15.0"
+            "version": "15.0p10"
           },
           {
             "name": "FreeBSD-libarchive",
-            "version": "15.0"
+            "version": "15.0p10"
           },
           {
             "name": "FreeBSD-libbsdstat",
@@ -59,7 +59,7 @@
           },
           {
             "name": "FreeBSD-libldns",
-            "version": "15.0"
+            "version": "15.0p10"
           },
           {
             "name": "FreeBSD-libmagic",
@@ -79,15 +79,15 @@
           },
           {
             "name": "FreeBSD-openssl",
-            "version": "15.0p2"
+            "version": "15.0p10"
           },
           {
             "name": "FreeBSD-openssl-lib",
-            "version": "15.0p2"
+            "version": "15.0p10"
           },
           {
             "name": "FreeBSD-pkg-bootstrap",
-            "version": "15.0"
+            "version": "15.0p10"
           },
           {
             "name": "FreeBSD-rc",
@@ -95,7 +95,7 @@
           },
           {
             "name": "FreeBSD-runtime",
-            "version": "15.0p9"
+            "version": "15.0p10"
           },
           {
             "name": "FreeBSD-tcpd",
@@ -107,7 +107,7 @@
           },
           {
             "name": "FreeBSD-utilities",
-            "version": "15.0p9"
+            "version": "15.0p10"
           },
           {
             "name": "FreeBSD-xz-lib",
@@ -115,7 +115,7 @@
           },
           {
             "name": "FreeBSD-zfs-lib",
-            "version": "15.0"
+            "version": "15.0p10"
           },
           {
             "name": "FreeBSD-zlib",
@@ -795,39 +795,39 @@
           },
           {
             "name": "@vue/compiler-core",
-            "version": "3.5.35"
+            "version": "3.5.38"
           },
           {
             "name": "@vue/compiler-dom",
-            "version": "3.5.35"
+            "version": "3.5.38"
           },
           {
             "name": "@vue/compiler-sfc",
-            "version": "3.5.35"
+            "version": "3.5.38"
           },
           {
             "name": "@vue/compiler-ssr",
-            "version": "3.5.35"
+            "version": "3.5.38"
           },
           {
             "name": "@vue/reactivity",
-            "version": "3.5.35"
+            "version": "3.5.38"
           },
           {
             "name": "@vue/runtime-core",
-            "version": "3.5.35"
+            "version": "3.5.38"
           },
           {
             "name": "@vue/runtime-dom",
-            "version": "3.5.35"
+            "version": "3.5.38"
           },
           {
             "name": "@vue/server-renderer",
-            "version": "3.5.35"
+            "version": "3.5.38"
           },
           {
             "name": "@vue/shared",
-            "version": "3.5.35"
+            "version": "3.5.38"
           },
           {
             "name": "@workspace/shared",
@@ -2327,7 +2327,7 @@
           },
           {
             "name": "vue",
-            "version": "3.5.35"
+            "version": "3.5.38"
           },
           {
             "name": "w3c-xmlserializer",
