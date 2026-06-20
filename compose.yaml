@@ -1,6 +1,7 @@
 name: sparkyfitness
 
 x-daemonless:
+  class: "service"
   title: "SparkyFitness"
   icon: ":material-heart-pulse:"
   category: "Health & Fitness"
