@@ -1,11 +1,11 @@
 {
-  "generated": "2026-06-20T13:23:51Z",
+  "generated": "2026-06-23T20:21:37Z",
   "image": "sparkyfitness",
   "tags": {
     "latest": {
-      "app_version": "v0.16.9",
+      "app_version": "v0.17.2",
       "arch": "amd64",
-      "generated": "2026-06-20T13:22:33Z",
+      "generated": "2026-06-23T20:20:17Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
@@ -207,7 +207,7 @@
           },
           {
             "name": "nginx",
-            "version": "1.30.2,3"
+            "version": "1.30.3,3"
           },
           {
             "name": "node24",
@@ -276,10 +276,6 @@
           {
             "name": "@ai-sdk/google",
             "version": "3.0.79"
-          },
-          {
-            "name": "@ai-sdk/mcp",
-            "version": "1.0.43"
           },
           {
             "name": "@ai-sdk/openai",
@@ -692,6 +688,10 @@
           {
             "name": "@types/pg",
             "version": "8.18.0"
+          },
+          {
+            "name": "@types/proxy-from-env",
+            "version": "1.0.4"
           },
           {
             "name": "@types/qs",
@@ -1930,6 +1930,10 @@
             "version": "2.0.7"
           },
           {
+            "name": "proxy-agent-negotiate",
+            "version": "1.1.0"
+          },
+          {
             "name": "proxy-from-env",
             "version": "1.1.0"
           },
@@ -2111,7 +2115,7 @@
           },
           {
             "name": "sparkyfitnessserver",
-            "version": "0.16.9"
+            "version": "0.17.2"
           },
           {
             "name": "sparse-bitfield",
@@ -2433,12 +2437,12 @@
         "freebsd": 63,
         "go": 0,
         "java": 0,
-        "node": 539,
+        "node": 540,
         "php": 0,
         "python": 0,
         "ruby": 0,
         "rust": 0,
-        "total": 602
+        "total": 603
       }
     }
   }
