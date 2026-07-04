@@ -1,11 +1,11 @@
 {
-  "generated": "2026-06-23T20:21:37Z",
+  "generated": "2026-07-04T12:07:00Z",
   "image": "sparkyfitness",
   "tags": {
     "latest": {
       "app_version": "v0.17.2",
       "arch": "amd64",
-      "generated": "2026-06-23T20:20:17Z",
+      "generated": "2026-07-04T12:05:45Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
@@ -27,7 +27,7 @@
           },
           {
             "name": "FreeBSD-clibs",
-            "version": "15.0"
+            "version": "15.0p11"
           },
           {
             "name": "FreeBSD-ctf-lib",
@@ -95,7 +95,7 @@
           },
           {
             "name": "FreeBSD-runtime",
-            "version": "15.0p10"
+            "version": "15.0p11"
           },
           {
             "name": "FreeBSD-tcpd",
@@ -107,7 +107,7 @@
           },
           {
             "name": "FreeBSD-utilities",
-            "version": "15.0p10"
+            "version": "15.0p11"
           },
           {
             "name": "FreeBSD-xz-lib",
@@ -115,7 +115,7 @@
           },
           {
             "name": "FreeBSD-zfs-lib",
-            "version": "15.0p10"
+            "version": "15.0p11"
           },
           {
             "name": "FreeBSD-zlib",
@@ -211,7 +211,7 @@
           },
           {
             "name": "node24",
-            "version": "24.14.1"
+            "version": "24.18.0"
           },
           {
             "name": "oniguruma",
@@ -795,39 +795,39 @@
           },
           {
             "name": "@vue/compiler-core",
-            "version": "3.5.38"
+            "version": "3.5.39"
           },
           {
             "name": "@vue/compiler-dom",
-            "version": "3.5.38"
+            "version": "3.5.39"
           },
           {
             "name": "@vue/compiler-sfc",
-            "version": "3.5.38"
+            "version": "3.5.39"
           },
           {
             "name": "@vue/compiler-ssr",
-            "version": "3.5.38"
+            "version": "3.5.39"
           },
           {
             "name": "@vue/reactivity",
-            "version": "3.5.38"
+            "version": "3.5.39"
           },
           {
             "name": "@vue/runtime-core",
-            "version": "3.5.38"
+            "version": "3.5.39"
           },
           {
             "name": "@vue/runtime-dom",
-            "version": "3.5.38"
+            "version": "3.5.39"
           },
           {
             "name": "@vue/server-renderer",
-            "version": "3.5.38"
+            "version": "3.5.39"
           },
           {
             "name": "@vue/shared",
-            "version": "3.5.38"
+            "version": "3.5.39"
           },
           {
             "name": "@workspace/shared",
@@ -2331,7 +2331,7 @@
           },
           {
             "name": "vue",
-            "version": "3.5.38"
+            "version": "3.5.39"
           },
           {
             "name": "w3c-xmlserializer",
