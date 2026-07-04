@@ -70,7 +70,7 @@ services:
       - ./backups:/backups
 
   sparkyfitness-db:
-    image: ghcr.io/daemonless/postgres:17
+    image: ghcr.io/daemonless/postgres:18
     container_name: sparkyfitness-db
     restart: unless-stopped
     network_mode: host
@@ -78,7 +78,7 @@ services:
     annotations:
       org.freebsd.jail.allow.sysvipc: "true"
 
-    # Generic daemonless PostgreSQL 17 image. Only the superuser role + database
+    # Generic daemonless PostgreSQL 18 image. Only the superuser role + database
     # are provisioned here; the SparkyFitness backend creates its own limited
     # app role (SPARKY_FITNESS_APP_DB_USER) during migrations.
     environment:

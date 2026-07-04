@@ -194,6 +194,56 @@ podman run -d --name sparkyfitness \
       - "/path/to/containers/sparkyfitness/backups:/backups"
 ```
 
+## Upgrading PostgreSQL (17 → 18)
+
+PostgreSQL does **not** upgrade its data files across major versions — changing the
+image tag alone will leave the database refusing to start. Upstream SparkyFitness
+mandates PostgreSQL 18 (see their
+[upgrade guide](https://codewithcj.github.io/SparkyFitness/install/postgres-upgrade));
+the daemonless path differs in two ways:
+
+- PGDATA stays at `/var/lib/postgresql/data` in daemonless images (the official
+  Docker `postgres:18` moved it to `/var/lib/postgresql`) — **do not change the
+  volume line**.
+- If another host-networked PostgreSQL shares the machine (e.g. Immich on 5432),
+  initialise the new cluster with a manual `initdb` rather than the image's
+  auto-init, which briefly starts postgres on the default port.
+
+```sh
+# 1. Quiesce the app and take a logical dump of everything (roles + database)
+podman stop sparkyfitness
+podman exec sparkyfitness-db pg_dumpall -U postgres -p 5433 > full_backup.sql
+
+# 2. Stop the database; keep the old data directory as rollback
+podman stop sparkyfitness-db
+mv ./postgres ./postgres-17
+mkdir ./postgres && chown 1000:1000 ./postgres
+
+# 3. Initialise a fresh PostgreSQL 18 cluster (manual initdb; needs sysvipc)
+podman run --rm --user 1000:1000 \
+  --annotation org.freebsd.jail.allow.sysvipc=true \
+  -v ./postgres:/var/lib/postgresql/data \
+  --entrypoint /usr/local/bin/initdb \
+  ghcr.io/daemonless/postgres:18 -D /var/lib/postgresql/data \
+  --username=postgres --auth-local=trust --auth-host=trust
+printf '\nport = 5433\nlisten_addresses = '\''*'\''\n' >> ./postgres/postgresql.conf
+
+# 4. Point compose at :18, then recreate the containers
+#    (remove the app container first — depends_on blocks recreating the db)
+podman rm sparkyfitness sparkyfitness-db
+podman-compose up -d sparkyfitness-db
+
+# 5. Restore
+podman exec -i sparkyfitness-db psql -U postgres -p 5433 -d postgres < full_backup.sql
+
+# 6. Start the app and verify before deleting ./postgres-17
+podman-compose up -d
+```
+
+The one expected restore message is `ERROR: role "postgres" already exists`
+(initdb created it). Verify your row counts against the source database before
+removing the `./postgres-17` rollback directory.
+
 ## Parameters
 
 ### Environment Variables

@@ -3,7 +3,7 @@ name: sparkyfitness-test
 
 services:
   sparkyfitness-db:
-    image: ghcr.io/daemonless/postgres:17
+    image: ghcr.io/daemonless/postgres:18
     network_mode: host
     annotations:
       org.freebsd.jail.allow.sysvipc: "true"
