@@ -1,11 +1,11 @@
 {
-  "generated": "2026-07-04T12:07:00Z",
+  "generated": "2026-07-06T16:31:58Z",
   "image": "sparkyfitness",
   "tags": {
     "latest": {
-      "app_version": "v0.17.2",
+      "app_version": "v0.17.3",
       "arch": "amd64",
-      "generated": "2026-07-04T12:05:45Z",
+      "generated": "2026-07-06T16:30:41Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
@@ -315,19 +315,19 @@
           },
           {
             "name": "@babel/helper-string-parser",
-            "version": "7.27.1"
+            "version": "7.29.7"
           },
           {
             "name": "@babel/helper-validator-identifier",
-            "version": "7.28.5"
+            "version": "7.29.7"
           },
           {
             "name": "@babel/parser",
-            "version": "7.29.0"
+            "version": "7.29.7"
           },
           {
             "name": "@babel/types",
-            "version": "7.29.0"
+            "version": "7.29.7"
           },
           {
             "name": "@bcoe/v8-coverage",
@@ -507,7 +507,7 @@
           },
           {
             "name": "@mongodb-js/saslprep",
-            "version": "1.4.9"
+            "version": "1.4.11"
           },
           {
             "name": "@noble/ciphers",
@@ -963,7 +963,7 @@
           },
           {
             "name": "bson",
-            "version": "7.2.0"
+            "version": "7.3.0"
           },
           {
             "name": "buffer-from",
@@ -2058,6 +2058,14 @@
             "version": "1.2.1"
           },
           {
+            "name": "seroval",
+            "version": "1.5.1"
+          },
+          {
+            "name": "seroval-plugins",
+            "version": "1.5.4"
+          },
+          {
             "name": "serve-static",
             "version": "2.2.1"
           },
@@ -2102,6 +2110,10 @@
             "version": "7.1.2"
           },
           {
+            "name": "solid-js",
+            "version": "1.9.13"
+          },
+          {
             "name": "source-map",
             "version": "0.6.1"
           },
@@ -2115,7 +2127,7 @@
           },
           {
             "name": "sparkyfitnessserver",
-            "version": "0.17.2"
+            "version": "0.17.3"
           },
           {
             "name": "sparse-bitfield",
@@ -2199,7 +2211,7 @@
           },
           {
             "name": "terser",
-            "version": "5.46.2"
+            "version": "5.48.0"
           },
           {
             "name": "tinybench",
@@ -2437,12 +2449,12 @@
         "freebsd": 63,
         "go": 0,
         "java": 0,
-        "node": 540,
+        "node": 543,
         "php": 0,
         "python": 0,
         "ruby": 0,
         "rust": 0,
-        "total": 603
+        "total": 606
       }
     }
   }
