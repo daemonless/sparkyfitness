@@ -1,11 +1,11 @@
 {
-  "generated": "2026-07-06T16:31:58Z",
+  "generated": "2026-07-18T09:49:34Z",
   "image": "sparkyfitness",
   "tags": {
     "latest": {
       "app_version": "v0.17.3",
       "arch": "amd64",
-      "generated": "2026-07-06T16:30:41Z",
+      "generated": "2026-07-18T09:48:13Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
@@ -135,11 +135,11 @@
           },
           {
             "name": "ca_root_nss",
-            "version": "3.124"
+            "version": "3.125"
           },
           {
             "name": "corepack",
-            "version": "0.34.6"
+            "version": "0.35.0"
           },
           {
             "name": "execline",
@@ -147,7 +147,7 @@
           },
           {
             "name": "gettext-runtime",
-            "version": "1.0"
+            "version": "1.0_1"
           },
           {
             "name": "googletest",
@@ -155,7 +155,7 @@
           },
           {
             "name": "hdr_histogram",
-            "version": "0.11.9"
+            "version": "0.11.10"
           },
           {
             "name": "icu",
@@ -167,7 +167,7 @@
           },
           {
             "name": "jq",
-            "version": "1.8.1"
+            "version": "1.8.2"
           },
           {
             "name": "libada",
@@ -175,39 +175,43 @@
           },
           {
             "name": "libedit",
-            "version": "3.1.20251016_1,1"
+            "version": "3.1.20260512,1"
+          },
+          {
+            "name": "liblz4",
+            "version": "1.10.0_2,1"
           },
           {
             "name": "libnghttp2",
-            "version": "1.68.1"
+            "version": "1.69.0"
           },
           {
             "name": "libnghttp3",
-            "version": "1.15.0"
+            "version": "1.17.0"
           },
           {
             "name": "libngtcp2",
-            "version": "1.22.1"
+            "version": "1.24.0"
           },
           {
             "name": "libuv",
-            "version": "1.52.0"
+            "version": "1.52.1"
           },
           {
             "name": "llhttp",
-            "version": "9.3.1"
+            "version": "9.4.2"
           },
           {
             "name": "merve",
-            "version": "1.2.0_1"
+            "version": "1.2.2_1"
           },
           {
             "name": "nbytes",
-            "version": "0.1.3"
+            "version": "0.1.4"
           },
           {
             "name": "nginx",
-            "version": "1.30.3,3"
+            "version": "1.30.3_2,3"
           },
           {
             "name": "node24",
@@ -223,7 +227,7 @@
           },
           {
             "name": "pkg",
-            "version": "2.6.2_1"
+            "version": "2.7.5"
           },
           {
             "name": "postgresql17-client",
@@ -239,11 +243,11 @@
           },
           {
             "name": "simdjson",
-            "version": "4.5.0"
+            "version": "4.6.4"
           },
           {
             "name": "simdutf",
-            "version": "8.2.0"
+            "version": "9.0.0"
           },
           {
             "name": "skalibs",
@@ -251,7 +255,7 @@
           },
           {
             "name": "sqlite3",
-            "version": "3.50.4_2,1"
+            "version": "3.53.3,1"
           },
           {
             "name": "uvwasi",
@@ -259,7 +263,7 @@
           },
           {
             "name": "zstd",
-            "version": "1.5.7_1"
+            "version": "1.5.7_2"
           }
         ],
         "go": [],
@@ -1067,7 +1071,7 @@
           },
           {
             "name": "corepack",
-            "version": "0.34.6"
+            "version": "0.35.0"
           },
           {
             "name": "cors",
@@ -2446,7 +2450,7 @@
       "source": "upstream",
       "summary": {
         "dotnet": 0,
-        "freebsd": 63,
+        "freebsd": 64,
         "go": 0,
         "java": 0,
         "node": 543,
@@ -2454,7 +2458,7 @@
         "python": 0,
         "ruby": 0,
         "rust": 0,
-        "total": 606
+        "total": 607
       }
     }
   }
