@@ -1,11 +1,11 @@
 {
-  "generated": "2026-08-01T14:22:45Z",
+  "generated": "2026-08-03T07:18:02Z",
   "image": "sparkyfitness",
   "tags": {
     "latest": {
-      "app_version": "v1.6.0",
+      "app_version": "v1.6.1",
       "arch": "amd64",
-      "generated": "2026-08-01T14:17:56Z",
+      "generated": "2026-08-03T07:14:46Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
@@ -2083,7 +2083,7 @@
           {
             "name": "@workspace/shared",
             "purl": "",
-            "version": "1.6.0"
+            "version": "1.6.1"
           },
           {
             "name": "@xmldom/is-dom-node",
@@ -4598,7 +4598,7 @@
           {
             "name": "sparkyfitnessserver",
             "purl": "",
-            "version": "1.6.0"
+            "version": "1.6.1"
           },
           {
             "name": "sparse-bitfield",

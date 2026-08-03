@@ -10,8 +10,6 @@ Source: dbuild templates
 
 Self-hosted privacy-first fitness tracker on FreeBSD.
 
-![](.daemonless/screenshots/67a5fb86-cc98-42ce-aa1e-ded7c57647c9.png)
-
 | | |
 |---|---|
 | **Registry** | `ghcr.io/daemonless/sparkyfitness` |
@@ -19,13 +17,11 @@ Self-hosted privacy-first fitness tracker on FreeBSD.
 | **Website** | [https://github.com/CodeWithCJ/SparkyFitness](https://github.com/CodeWithCJ/SparkyFitness) |
 
 ## Version Tags
-
 | Tag | Description | Best For |
 | :--- | :--- | :--- |
 | `latest` | **Upstream Binary**. Built from official release. | Most users. Matches Linux Docker behavior. |
 
 ## Prerequisites
-
 Before deploying, ensure your host environment is ready. See the [Quick Start Guide](https://daemonless.io/guides/quick-start) for host setup instructions.
 
 ## Deployment
@@ -35,26 +31,26 @@ Before deploying, ensure your host environment is ready. See the [Quick Start Gu
 ```yaml
 services:
   sparkyfitness:
-    image: ghcr.io/daemonless/sparkyfitness:latest
+    image: "ghcr.io/daemonless/sparkyfitness:latest"
     container_name: sparkyfitness
     environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=${TZ}
-      - NODE_ENV=production
-      - SPARKY_FITNESS_DB_HOST=127.0.0.1
-      - SPARKY_FITNESS_DB_PORT=5433
-      - SPARKY_FITNESS_DB_NAME=${SPARKY_FITNESS_DB_NAME}
-      - SPARKY_FITNESS_DB_USER=${SPARKY_FITNESS_DB_USER}
-      - SPARKY_FITNESS_DB_PASSWORD=${SPARKY_FITNESS_DB_PASSWORD}
-      - SPARKY_FITNESS_APP_DB_USER=${SPARKY_FITNESS_APP_DB_USER}
-      - SPARKY_FITNESS_APP_DB_PASSWORD=${SPARKY_FITNESS_APP_DB_PASSWORD}
-      - SPARKY_FITNESS_API_ENCRYPTION_KEY=${SPARKY_FITNESS_API_ENCRYPTION_KEY}
-      - BETTER_AUTH_SECRET=${BETTER_AUTH_SECRET}
-      - SPARKY_FITNESS_FRONTEND_URL=${SPARKY_FITNESS_FRONTEND_URL}
-      - SPARKY_FITNESS_SERVER_HOST=127.0.0.1
-      - SPARKY_FITNESS_SERVER_PORT=3010
-      - SPARKY_FITNESS_LOG_LEVEL=ERROR
+      - PUID=1000  # User ID for the application process
+      - PGID=1000  # Group ID for the application process
+      - TZ=${TZ}  # Timezone for the container
+      - NODE_ENV=production  # Node runtime mode; leave as 'production'
+      - SPARKY_FITNESS_DB_HOST=127.0.0.1  # PostgreSQL host the backend connects to; leave as 127.0.0.1 (host networking)
+      - SPARKY_FITNESS_DB_PORT=5433  # PostgreSQL port; MUST match the sidecar's POSTGRES_PORT. Default 5433 (NOT 5432) so this can coexist with another host-networked Postgres (e.g. Immich on 5432) on the same host. ⚠ With network_mode: host, two Postgres on the same port silently collide — keep each service on a distinct port. NOTE: this only takes effect if the daemonless/postgres image honors POSTGRES_PORT (see project README / upstream fix); otherwise the sidecar falls back to 5432.
+      - SPARKY_FITNESS_DB_NAME=${SPARKY_FITNESS_DB_NAME}  # PostgreSQL database name
+      - SPARKY_FITNESS_DB_USER=${SPARKY_FITNESS_DB_USER}  # PostgreSQL superuser
+      - SPARKY_FITNESS_DB_PASSWORD=${SPARKY_FITNESS_DB_PASSWORD}  # PostgreSQL password (from secrets.env)
+      - SPARKY_FITNESS_APP_DB_USER=${SPARKY_FITNESS_APP_DB_USER}  # Limited app DB role the backend creates during migrations (from secrets)
+      - SPARKY_FITNESS_APP_DB_PASSWORD=${SPARKY_FITNESS_APP_DB_PASSWORD}  # Password for the limited app DB role (from secrets)
+      - SPARKY_FITNESS_API_ENCRYPTION_KEY=${SPARKY_FITNESS_API_ENCRYPTION_KEY}  # 64-char hex encryption key (from secrets.env)
+      - BETTER_AUTH_SECRET=${BETTER_AUTH_SECRET}  # Auth session signing secret (from secrets.env)
+      - SPARKY_FITNESS_FRONTEND_URL=${SPARKY_FITNESS_FRONTEND_URL}  # Public URL of the frontend for CORS
+      - SPARKY_FITNESS_SERVER_HOST=127.0.0.1  # Internal bind address for the node backend; leave as 127.0.0.1 (nginx proxies to it)
+      - SPARKY_FITNESS_SERVER_PORT=3010  # Internal node backend port; leave as default
+      - SPARKY_FITNESS_LOG_LEVEL=ERROR  # Backend log verbosity (e.g. ERROR, INFO, DEBUG)
     volumes:
       - "/path/to/containers/sparkyfitness/uploads:/uploads"
       - "/path/to/containers/sparkyfitness/backups:/backups"
@@ -62,10 +58,11 @@ services:
 ```
 
 ### AppJail Director
-
 **.env**:
 
 ```
+# .env
+
 DIRECTOR_PROJECT=sparkyfitness
 PUID=1000
 PGID=1000
@@ -89,6 +86,8 @@ SPARKY_FITNESS_LOG_LEVEL=ERROR
 **appjail-director.yml**:
 
 ```yaml
+# appjail-director.yml
+
 options:
   - virtualnet: ':<random> default'
   - nat:
@@ -130,6 +129,8 @@ volumes:
 **Makejail**:
 
 ```
+# Makejail
+
 ARG tag=latest
 
 OPTION overwrite=force
@@ -162,13 +163,43 @@ podman run -d --name sparkyfitness \
   ghcr.io/daemonless/sparkyfitness:latest
 ```
 
+### AppJail
+
+```bash
+appjail oci run -Pd \
+  -o overwrite=force \
+  -o container="args:--pull" \
+  -o virtualnet=":<random> default" \
+  -o nat \
+  -e PUID=1000 \
+  -e PGID=1000 \
+  -e TZ=${TZ} \
+  -e NODE_ENV=production \
+  -e SPARKY_FITNESS_DB_HOST=127.0.0.1 \
+  -e SPARKY_FITNESS_DB_PORT=5433 \
+  -e SPARKY_FITNESS_DB_NAME=${SPARKY_FITNESS_DB_NAME} \
+  -e SPARKY_FITNESS_DB_USER=${SPARKY_FITNESS_DB_USER} \
+  -e SPARKY_FITNESS_DB_PASSWORD=${SPARKY_FITNESS_DB_PASSWORD} \
+  -e SPARKY_FITNESS_APP_DB_USER=${SPARKY_FITNESS_APP_DB_USER} \
+  -e SPARKY_FITNESS_APP_DB_PASSWORD=${SPARKY_FITNESS_APP_DB_PASSWORD} \
+  -e SPARKY_FITNESS_API_ENCRYPTION_KEY=${SPARKY_FITNESS_API_ENCRYPTION_KEY} \
+  -e BETTER_AUTH_SECRET=${BETTER_AUTH_SECRET} \
+  -e SPARKY_FITNESS_FRONTEND_URL=${SPARKY_FITNESS_FRONTEND_URL} \
+  -e SPARKY_FITNESS_SERVER_HOST=127.0.0.1 \
+  -e SPARKY_FITNESS_SERVER_PORT=3010 \
+  -e SPARKY_FITNESS_LOG_LEVEL=ERROR \
+  -o fstab="/path/to/containers/sparkyfitness/uploads /uploads <pseudofs>" \
+  -o fstab="/path/to/containers/sparkyfitness/backups /backups <pseudofs>" \
+  ghcr.io/daemonless/sparkyfitness:latest sparkyfitness
+```
+
 ### Ansible
 
 ```yaml
 - name: Deploy sparkyfitness
   containers.podman.podman_container:
     name: sparkyfitness
-    image: ghcr.io/daemonless/sparkyfitness:latest
+    image: "ghcr.io/daemonless/sparkyfitness:latest"
     state: started
     restart_policy: always
     env:
@@ -193,56 +224,6 @@ podman run -d --name sparkyfitness \
       - "/path/to/containers/sparkyfitness/uploads:/uploads"
       - "/path/to/containers/sparkyfitness/backups:/backups"
 ```
-
-## Upgrading PostgreSQL (17 → 18)
-
-PostgreSQL does **not** upgrade its data files across major versions — changing the
-image tag alone will leave the database refusing to start. Upstream SparkyFitness
-mandates PostgreSQL 18 (see their
-[upgrade guide](https://codewithcj.github.io/SparkyFitness/install/postgres-upgrade));
-the daemonless path differs in two ways:
-
-- PGDATA stays at `/var/lib/postgresql/data` in daemonless images (the official
-  Docker `postgres:18` moved it to `/var/lib/postgresql`) — **do not change the
-  volume line**.
-- If another host-networked PostgreSQL shares the machine (e.g. Immich on 5432),
-  initialise the new cluster with a manual `initdb` rather than the image's
-  auto-init, which briefly starts postgres on the default port.
-
-```sh
-# 1. Quiesce the app and take a logical dump of everything (roles + database)
-podman stop sparkyfitness
-podman exec sparkyfitness-db pg_dumpall -U postgres -p 5433 > full_backup.sql
-
-# 2. Stop the database; keep the old data directory as rollback
-podman stop sparkyfitness-db
-mv ./postgres ./postgres-17
-mkdir ./postgres && chown 1000:1000 ./postgres
-
-# 3. Initialise a fresh PostgreSQL 18 cluster (manual initdb; needs sysvipc)
-podman run --rm --user 1000:1000 \
-  --annotation org.freebsd.jail.allow.sysvipc=true \
-  -v ./postgres:/var/lib/postgresql/data \
-  --entrypoint /usr/local/bin/initdb \
-  ghcr.io/daemonless/postgres:18 -D /var/lib/postgresql/data \
-  --username=postgres --auth-local=trust --auth-host=trust
-printf '\nport = 5433\nlisten_addresses = '\''*'\''\n' >> ./postgres/postgresql.conf
-
-# 4. Point compose at :18, then recreate the containers
-#    (remove the app container first — depends_on blocks recreating the db)
-podman rm sparkyfitness sparkyfitness-db
-podman-compose up -d sparkyfitness-db
-
-# 5. Restore
-podman exec -i sparkyfitness-db psql -U postgres -p 5433 -d postgres < full_backup.sql
-
-# 6. Start the app and verify before deleting ./postgres-17
-podman-compose up -d
-```
-
-The one expected restore message is `ERROR: role "postgres" already exists`
-(initdb created it). Verify your row counts against the source database before
-removing the `./postgres-17` rollback directory.
 
 ## Parameters
 
@@ -277,4 +258,8 @@ removing the `./postgres-17` rollback directory.
 
 **Architectures:** amd64
 **User:** `bsd` (UID/GID via PUID/PGID, defaults to 1000:1000)
-**Base:** FreeBSD 15.0
+**Base:** FreeBSD 15
+
+---
+
+Need help? Join our [Discord](https://discord.gg/Kb9tkhecZT) community.
