@@ -1,11 +1,11 @@
 {
-  "generated": "2026-08-03T07:18:02Z",
+  "generated": "2026-08-11T10:24:25Z",
   "image": "sparkyfitness",
   "tags": {
     "latest": {
       "app_version": "v1.6.1",
       "arch": "amd64",
-      "generated": "2026-08-03T07:14:46Z",
+      "generated": "2026-08-11T10:23:13Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
@@ -447,7 +447,7 @@
               "APACHE20"
             ],
             "name": "simdjson",
-            "version": "4.6.4"
+            "version": "4.6.6"
           },
           {
             "licenses": [
