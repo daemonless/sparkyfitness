@@ -54,8 +54,11 @@ services:
     volumes:
       - "/path/to/containers/sparkyfitness/uploads:/uploads"
       - "/path/to/containers/sparkyfitness/backups:/backups"
-    restart: unless-stopped
+    # always (not unless-stopped) so FreeBSD's podman rc.d auto-starts it at boot
+    restart: always
 ```
+
+Save as `compose.yaml`, then run `podman-compose up -d`.
 
 ### AppJail Director
 **.env**:
@@ -137,6 +140,8 @@ OPTION overwrite=force
 OPTION from=ghcr.io/daemonless/sparkyfitness:${tag}
 ```
 
+Save the files above, then run `appjail-director up`.
+
 ### Podman CLI
 
 ```bash
@@ -162,6 +167,8 @@ podman run -d --name sparkyfitness \
   -v /path/to/containers/sparkyfitness/backups:/backups \
   ghcr.io/daemonless/sparkyfitness:latest
 ```
+
+Save as `run.sh`, then run `sh run.sh`.
 
 ### AppJail
 
@@ -191,6 +198,64 @@ appjail oci run -Pd \
   -o fstab="/path/to/containers/sparkyfitness/uploads /uploads <pseudofs>" \
   -o fstab="/path/to/containers/sparkyfitness/backups /backups <pseudofs>" \
   ghcr.io/daemonless/sparkyfitness:latest sparkyfitness
+```
+
+Save as `run.sh`, then run `sh run.sh`.
+
+### Bastille
+
+> [!WARNING]
+> Bastille's OCI support is **experimental**. It requires `buildah`, shares the host network stack (`inherit`), and persists image-declared volumes under `--data-path`.
+
+```yaml
+services:
+  sparkyfitness:
+    image: "ghcr.io/daemonless/sparkyfitness:latest"
+    container_name: sparkyfitness
+    network_mode: host  # jail shares host networking
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=${TZ}
+      - NODE_ENV=production
+      - SPARKY_FITNESS_DB_HOST=127.0.0.1
+      - SPARKY_FITNESS_DB_PORT=5433
+      - SPARKY_FITNESS_DB_NAME=${SPARKY_FITNESS_DB_NAME}
+      - SPARKY_FITNESS_DB_USER=${SPARKY_FITNESS_DB_USER}
+      - SPARKY_FITNESS_DB_PASSWORD=${SPARKY_FITNESS_DB_PASSWORD}
+      - SPARKY_FITNESS_APP_DB_USER=${SPARKY_FITNESS_APP_DB_USER}
+      - SPARKY_FITNESS_APP_DB_PASSWORD=${SPARKY_FITNESS_APP_DB_PASSWORD}
+      - SPARKY_FITNESS_API_ENCRYPTION_KEY=${SPARKY_FITNESS_API_ENCRYPTION_KEY}
+      - BETTER_AUTH_SECRET=${BETTER_AUTH_SECRET}
+      - SPARKY_FITNESS_FRONTEND_URL=${SPARKY_FITNESS_FRONTEND_URL}
+      - SPARKY_FITNESS_SERVER_HOST=127.0.0.1
+      - SPARKY_FITNESS_SERVER_PORT=3010
+      - SPARKY_FITNESS_LOG_LEVEL=ERROR
+```
+
+Save as `podman-compose.yml`, then run `bastille up`. Or via CLI:
+
+```bash
+bastille create -O \
+  --env PUID=1000 \
+  --env PGID=1000 \
+  --env TZ=${TZ} \
+  --env NODE_ENV=production \
+  --env SPARKY_FITNESS_DB_HOST=127.0.0.1 \
+  --env SPARKY_FITNESS_DB_PORT=5433 \
+  --env SPARKY_FITNESS_DB_NAME=${SPARKY_FITNESS_DB_NAME} \
+  --env SPARKY_FITNESS_DB_USER=${SPARKY_FITNESS_DB_USER} \
+  --env SPARKY_FITNESS_DB_PASSWORD=${SPARKY_FITNESS_DB_PASSWORD} \
+  --env SPARKY_FITNESS_APP_DB_USER=${SPARKY_FITNESS_APP_DB_USER} \
+  --env SPARKY_FITNESS_APP_DB_PASSWORD=${SPARKY_FITNESS_APP_DB_PASSWORD} \
+  --env SPARKY_FITNESS_API_ENCRYPTION_KEY=${SPARKY_FITNESS_API_ENCRYPTION_KEY} \
+  --env BETTER_AUTH_SECRET=${BETTER_AUTH_SECRET} \
+  --env SPARKY_FITNESS_FRONTEND_URL=${SPARKY_FITNESS_FRONTEND_URL} \
+  --env SPARKY_FITNESS_SERVER_HOST=127.0.0.1 \
+  --env SPARKY_FITNESS_SERVER_PORT=3010 \
+  --env SPARKY_FITNESS_LOG_LEVEL=ERROR \
+  --data-path /path/to/containers/sparkyfitness \
+  sparkyfitness ghcr.io/daemonless/sparkyfitness:latest inherit
 ```
 
 ### Ansible
@@ -224,6 +289,8 @@ appjail oci run -Pd \
       - "/path/to/containers/sparkyfitness/uploads:/uploads"
       - "/path/to/containers/sparkyfitness/backups:/backups"
 ```
+
+Save as `sparkyfitness-deploy.yaml`, then run `ansible-playbook sparkyfitness-deploy.yaml`.
 
 ## Parameters
 
