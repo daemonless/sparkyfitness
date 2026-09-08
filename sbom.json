@@ -1,11 +1,11 @@
 {
-  "generated": "2026-08-27T14:59:58Z",
+  "generated": "2026-09-08T07:42:48Z",
   "image": "sparkyfitness",
   "tags": {
     "latest": {
-      "app_version": "v1.6.4",
+      "app_version": "v1.6.5",
       "arch": "amd64",
-      "generated": "2026-08-27T14:58:49Z",
+      "generated": "2026-09-08T07:41:18Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
@@ -147,7 +147,7 @@
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-openssl-lib",
-            "version": "15.1"
+            "version": "15.1p3"
           },
           {
             "licenses": [
@@ -175,7 +175,7 @@
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-runtime",
-            "version": "15.1p2"
+            "version": "15.1p3"
           },
           {
             "licenses": [
@@ -252,7 +252,7 @@
               "MPL20"
             ],
             "name": "ca_root_nss",
-            "version": "3.126.1"
+            "version": "3.127"
           },
           {
             "licenses": [
@@ -397,7 +397,7 @@
               "MIT"
             ],
             "name": "node24",
-            "version": "24.18.0"
+            "version": "24.19.0"
           },
           {
             "licenses": [
@@ -2088,7 +2088,7 @@
           {
             "name": "@workspace/shared",
             "purl": "",
-            "version": "1.6.4"
+            "version": "1.6.5"
           },
           {
             "name": "@xmldom/is-dom-node",
@@ -4133,7 +4133,7 @@
           {
             "name": "picomatch",
             "purl": "",
-            "version": "2.3.1"
+            "version": "2.3.2"
           },
           {
             "name": "pirates",
@@ -4188,7 +4188,7 @@
           {
             "name": "prettier",
             "purl": "",
-            "version": "3.8.1"
+            "version": "3.9.6"
           },
           {
             "name": "pretty-format",
@@ -4603,7 +4603,7 @@
           {
             "name": "sparkyfitnessserver",
             "purl": "",
-            "version": "1.6.4"
+            "version": "1.6.5"
           },
           {
             "name": "sparse-bitfield",
