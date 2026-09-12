@@ -10,7 +10,6 @@ x-daemonless:
   web_url: "https://github.com/CodeWithCJ/SparkyFitness"
   user: "bsd"
   mlock: false
-  type: stack
   # Sidecar for the AppJail director bundle. Host networking so the app
   # reaches PostgreSQL on 127.0.0.1, as under podman.
   appjail:
