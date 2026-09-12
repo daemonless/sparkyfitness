@@ -10,24 +10,45 @@ x-daemonless:
   web_url: "https://github.com/CodeWithCJ/SparkyFitness"
   user: "bsd"
   mlock: false
-  appjail: true
+  type: stack
+  # Sidecar for the AppJail director bundle. Host networking so the app
+  # reaches PostgreSQL on 127.0.0.1, as under podman.
+  appjail:
+    director:
+      options:
+        - alias:
+        - ip4_inherit:
+    depends_on:
+      - name: sparkyfitness-db
+        image: ghcr.io/daemonless/postgres:18
+        template: postgres-template.conf
+        env:
+          POSTGRES_DB: "!ENV '${SPARKY_FITNESS_DB_NAME}'"
+          POSTGRES_USER: "!ENV '${SPARKY_FITNESS_DB_USER}'"
+          POSTGRES_PASSWORD: "!ENV '${SPARKY_FITNESS_DB_PASSWORD}'"
+          POSTGRES_PORT: "5433"
+        volumes:
+          db_data: /var/lib/postgresql/data
 
   docs:
     env:
       PUID: "User ID for the application process"
       PGID: "Group ID for the application process"
       TZ: "Timezone for the container"
+      UPLOADS_LOCATION: "Path to store user uploads (profile pictures, exercise images)"
+      BACKUPS_LOCATION: "Path to store server backups"
+      DB_DATA_LOCATION: "Path to store PostgreSQL data files"
       SPARKY_FITNESS_DB_NAME: "PostgreSQL database name"
       SPARKY_FITNESS_DB_USER: "PostgreSQL superuser"
-      SPARKY_FITNESS_DB_PASSWORD: "PostgreSQL password (from secrets.env)"
-      SPARKY_FITNESS_API_ENCRYPTION_KEY: "64-char hex encryption key (from secrets.env)"
-      BETTER_AUTH_SECRET: "Auth session signing secret (from secrets.env)"
+      SPARKY_FITNESS_DB_PASSWORD: "PostgreSQL password"
+      SPARKY_FITNESS_API_ENCRYPTION_KEY: "64-char hex encryption key"
+      BETTER_AUTH_SECRET: "Auth session signing secret"
       SPARKY_FITNESS_FRONTEND_URL: "Public URL of the frontend for CORS"
       NODE_ENV: "Node runtime mode; leave as 'production'"
       SPARKY_FITNESS_DB_HOST: "PostgreSQL host the backend connects to; leave as 127.0.0.1 (host networking)"
       SPARKY_FITNESS_DB_PORT: "PostgreSQL port; MUST match the sidecar's POSTGRES_PORT. Default 5433 (NOT 5432) so this can coexist with another host-networked Postgres (e.g. Immich on 5432) on the same host. ⚠ With network_mode: host, two Postgres on the same port silently collide — keep each service on a distinct port. NOTE: this only takes effect if the daemonless/postgres image honors POSTGRES_PORT (see project README / upstream fix); otherwise the sidecar falls back to 5432."
-      SPARKY_FITNESS_APP_DB_USER: "Limited app DB role the backend creates during migrations (from secrets)"
-      SPARKY_FITNESS_APP_DB_PASSWORD: "Password for the limited app DB role (from secrets)"
+      SPARKY_FITNESS_APP_DB_USER: "Limited app DB role the backend creates during migrations"
+      SPARKY_FITNESS_APP_DB_PASSWORD: "Password for the limited app DB role"
       SPARKY_FITNESS_SERVER_HOST: "Internal bind address for the node backend; leave as 127.0.0.1 (nginx proxies to it)"
       SPARKY_FITNESS_SERVER_PORT: "Internal node backend port; leave as default"
       SPARKY_FITNESS_LOG_LEVEL: "Backend log verbosity (e.g. ERROR, INFO, DEBUG)"
@@ -49,7 +70,7 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
-      - TZ=${TZ}
+      - TZ=${TZ:-UTC}
       - NODE_ENV=production
       - SPARKY_FITNESS_DB_HOST=127.0.0.1
       - SPARKY_FITNESS_DB_PORT=5433
@@ -66,8 +87,8 @@ services:
       - SPARKY_FITNESS_LOG_LEVEL=ERROR
 
     volumes:
-      - ./uploads:/uploads
-      - ./backups:/backups
+      - ${UPLOADS_LOCATION}:/uploads
+      - ${BACKUPS_LOCATION}:/backups
 
   sparkyfitness-db:
     image: ghcr.io/daemonless/postgres:18
@@ -92,4 +113,4 @@ services:
       - POSTGRES_PORT=5433
 
     volumes:
-      - ./postgres:/var/lib/postgresql/data
+      - ${DB_DATA_LOCATION}:/var/lib/postgresql/data
