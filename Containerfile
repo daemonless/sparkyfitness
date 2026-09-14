@@ -53,8 +53,9 @@ RUN pnpm install --frozen-lockfile \
 # Build frontend (React + Vite)
 RUN pnpm --filter sparkyfitnessfrontend run build
 
-# Deploy server to standalone directory (flat node_modules, no workspace symlinks)
-RUN pnpm --filter=sparkyfitnessserver deploy --legacy /deploy
+# No --legacy: it re-resolves the whole workspace incl. SparkyFitnessMobile and
+# trips upstream's minimumReleaseAge gate. Default deploy reads the lockfile.
+RUN pnpm --filter=sparkyfitnessserver deploy /deploy
 
 # Ensure tsx is available in the deployed server
 # (pnpm deploy --legacy may skip devDependencies)
