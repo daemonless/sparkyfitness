@@ -42,7 +42,7 @@ x-daemonless:
       SPARKY_FITNESS_DB_PASSWORD: "PostgreSQL password"
       SPARKY_FITNESS_API_ENCRYPTION_KEY: "64-char hex encryption key"
       BETTER_AUTH_SECRET: "Auth session signing secret"
-      SPARKY_FITNESS_FRONTEND_URL: "Public URL of the frontend for CORS"
+      SPARKY_FITNESS_FRONTEND_URL: "URL you will open this app at, e.g. http://myhost:3004 (sign-up fails if it does not match)"
       NODE_ENV: "Node runtime mode; leave as 'production'"
       SPARKY_FITNESS_DB_HOST: "PostgreSQL host the backend connects to; leave as 127.0.0.1 (host networking)"
       SPARKY_FITNESS_DB_PORT: "PostgreSQL port; MUST match the sidecar's POSTGRES_PORT. Default 5433 (NOT 5432) so this can coexist with another host-networked Postgres (e.g. Immich on 5432) on the same host. ⚠ With network_mode: host, two Postgres on the same port silently collide — keep each service on a distinct port. NOTE: this only takes effect if the daemonless/postgres image honors POSTGRES_PORT (see project README / upstream fix); otherwise the sidecar falls back to 5432."
@@ -59,7 +59,10 @@ x-daemonless:
 
 services:
   sparkyfitness:
-    image: ghcr.io/daemonless/sparkyfitness:latest
+    # Tag in a ${VAR} so the catalog exposes it as an image_tag variable and the
+    # install wizard can offer this repo's published versions. The database is
+    # pinned deliberately: retagging it would be a destructive migration.
+    image: ghcr.io/daemonless/sparkyfitness:${SPARKYFITNESS_TAG:-latest}
     container_name: sparkyfitness
     restart: unless-stopped
     network_mode: host
