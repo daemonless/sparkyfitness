@@ -1,11 +1,11 @@
 {
-  "generated": "2026-09-14T22:30:44Z",
+  "generated": "2026-09-20T10:39:12Z",
   "image": "sparkyfitness",
   "tags": {
     "latest": {
       "app_version": "v1.7.1",
       "arch": "amd64",
-      "generated": "2026-09-14T22:29:38Z",
+      "generated": "2026-09-20T10:38:13Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
@@ -49,6 +49,13 @@
               "CDDL-1.0"
             ],
             "name": "FreeBSD-ctf-lib",
+            "version": "15.1"
+          },
+          {
+            "licenses": [
+              "BSD-3-Clause"
+            ],
+            "name": "FreeBSD-dhclient",
             "version": "15.1"
           },
           {
@@ -174,6 +181,13 @@
             "licenses": [
               "BSD2CLAUSE"
             ],
+            "name": "FreeBSD-resolvconf",
+            "version": "15.1"
+          },
+          {
+            "licenses": [
+              "BSD2CLAUSE"
+            ],
             "name": "FreeBSD-runtime",
             "version": "15.1p3"
           },
@@ -252,7 +266,7 @@
               "MPL20"
             ],
             "name": "ca_root_nss",
-            "version": "3.127"
+            "version": "3.129"
           },
           {
             "licenses": [
@@ -1081,49 +1095,54 @@
             "version": "3.0.4"
           },
           {
+            "name": "@devframes/agentic",
+            "purl": "",
+            "version": "1.0.0"
+          },
+          {
             "name": "@devframes/hub",
             "purl": "",
-            "version": "0.9.18"
+            "version": "1.0.0"
           },
           {
             "name": "@devframes/hub-ui",
             "purl": "",
-            "version": "0.9.18"
+            "version": "1.0.0"
           },
           {
             "name": "@devframes/json-render",
             "purl": "",
-            "version": "0.9.18"
+            "version": "1.0.0"
           },
           {
             "name": "@devframes/json-render-ui",
             "purl": "",
-            "version": "0.9.18"
+            "version": "1.0.0"
           },
           {
             "name": "@devframes/plugin-inspect",
             "purl": "",
-            "version": "0.9.18"
+            "version": "1.0.0"
           },
           {
             "name": "@devframes/plugin-messages",
             "purl": "",
-            "version": "0.9.18"
+            "version": "1.0.0"
           },
           {
             "name": "@devframes/plugin-terminals",
             "purl": "",
-            "version": "0.9.18"
+            "version": "1.0.0"
           },
           {
             "name": "@devframes/service-open",
             "purl": "",
-            "version": "0.9.18"
+            "version": "1.0.0"
           },
           {
             "name": "@devframes/vite",
             "purl": "",
-            "version": "0.9.18"
+            "version": "1.0.0"
           },
           {
             "name": "@esbuild/freebsd-arm64",
@@ -1479,6 +1498,11 @@
             "name": "@levischuck/tiny-cbor",
             "purl": "",
             "version": "0.2.11"
+          },
+          {
+            "name": "@modelcontextprotocol/client",
+            "purl": "",
+            "version": "2.0.0"
           },
           {
             "name": "@modelcontextprotocol/core",
@@ -2073,12 +2097,12 @@
           {
             "name": "@vitejs/devtools",
             "purl": "",
-            "version": "0.7.3"
+            "version": "0.7.5"
           },
           {
             "name": "@vitejs/devtools-kit",
             "purl": "",
-            "version": "0.7.3"
+            "version": "0.7.5"
           },
           {
             "name": "@vitest/coverage-v8",
@@ -2421,11 +2445,6 @@
             "version": "2.3.0"
           },
           {
-            "name": "birpc",
-            "purl": "",
-            "version": "4.2.0"
-          },
-          {
             "name": "body-parser",
             "purl": "",
             "version": "2.2.2"
@@ -2544,11 +2563,6 @@
             "name": "ci-info",
             "purl": "",
             "version": "2.0.0"
-          },
-          {
-            "name": "citty",
-            "purl": "",
-            "version": "0.2.2"
           },
           {
             "name": "cli-cursor",
@@ -2773,7 +2787,7 @@
           {
             "name": "devframe",
             "purl": "",
-            "version": "0.9.18"
+            "version": "1.0.0"
           },
           {
             "name": "dezalgo",
@@ -3293,7 +3307,7 @@
           {
             "name": "h3",
             "purl": "",
-            "version": "2.0.1-rc.31"
+            "version": "2.0.1-rc.32"
           },
           {
             "name": "has-flag",
@@ -3936,11 +3950,6 @@
             "version": "7.0.2"
           },
           {
-            "name": "mrmime",
-            "purl": "",
-            "version": "2.0.1"
-          },
-          {
             "name": "ms",
             "purl": "",
             "version": "2.0.0"
@@ -4046,11 +4055,6 @@
             "version": "2.2.23"
           },
           {
-            "name": "nypm",
-            "purl": "",
-            "version": "0.6.10"
-          },
-          {
             "name": "ob1",
             "purl": "",
             "version": "0.84.5"
@@ -4131,6 +4135,11 @@
             "version": "1.0.1"
           },
           {
+            "name": "package-manager-detector",
+            "purl": "",
+            "version": "1.8.0"
+          },
+          {
             "name": "papaparse",
             "purl": "",
             "version": "5.7.0"
@@ -4189,11 +4198,6 @@
             "name": "pathe",
             "purl": "",
             "version": "2.0.3"
-          },
-          {
-            "name": "perfect-debounce",
-            "purl": "",
-            "version": "2.1.0"
           },
           {
             "name": "pg",
@@ -4743,7 +4747,7 @@
           {
             "name": "srvx",
             "purl": "",
-            "version": "1.0.4"
+            "version": "1.0.5"
           },
           {
             "name": "stack-utils",
@@ -5319,10 +5323,10 @@
       "source": "upstream",
       "summary": {
         "dotnet": 0,
-        "freebsd": 67,
+        "freebsd": 69,
         "go": 0,
         "java": 0,
-        "node": 964,
+        "node": 962,
         "php": 0,
         "python": 0,
         "ruby": 0,

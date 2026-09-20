@@ -48,7 +48,7 @@ services:
       - SPARKY_FITNESS_APP_DB_PASSWORD=${SPARKY_FITNESS_APP_DB_PASSWORD}  # Password for the limited app DB role
       - SPARKY_FITNESS_API_ENCRYPTION_KEY=${SPARKY_FITNESS_API_ENCRYPTION_KEY}  # 64-char hex encryption key
       - BETTER_AUTH_SECRET=${BETTER_AUTH_SECRET}  # Auth session signing secret
-      - SPARKY_FITNESS_FRONTEND_URL=${SPARKY_FITNESS_FRONTEND_URL}  # Public URL of the frontend for CORS
+      - SPARKY_FITNESS_FRONTEND_URL=${SPARKY_FITNESS_FRONTEND_URL}  # URL you will open this app at, e.g. http://myhost:3004 (sign-up fails if it does not match)
       - SPARKY_FITNESS_SERVER_HOST=127.0.0.1  # Internal bind address for the node backend; leave as 127.0.0.1 (nginx proxies to it)
       - SPARKY_FITNESS_SERVER_PORT=3010  # Internal node backend port; leave as default
       - SPARKY_FITNESS_LOG_LEVEL=ERROR  # Backend log verbosity (e.g. ERROR, INFO, DEBUG)
@@ -362,7 +362,7 @@ Save as `sparkyfitness-deploy.yaml`, then run `ansible-playbook sparkyfitness-de
 | `SPARKY_FITNESS_APP_DB_PASSWORD` | `${SPARKY_FITNESS_APP_DB_PASSWORD}` | Password for the limited app DB role |
 | `SPARKY_FITNESS_API_ENCRYPTION_KEY` | `${SPARKY_FITNESS_API_ENCRYPTION_KEY}` | 64-char hex encryption key |
 | `BETTER_AUTH_SECRET` | `${BETTER_AUTH_SECRET}` | Auth session signing secret |
-| `SPARKY_FITNESS_FRONTEND_URL` | `${SPARKY_FITNESS_FRONTEND_URL}` | Public URL of the frontend for CORS |
+| `SPARKY_FITNESS_FRONTEND_URL` | `${SPARKY_FITNESS_FRONTEND_URL}` | URL you will open this app at, e.g. http://myhost:3004 (sign-up fails if it does not match) |
 | `SPARKY_FITNESS_SERVER_HOST` | `127.0.0.1` | Internal bind address for the node backend; leave as 127.0.0.1 (nginx proxies to it) |
 | `SPARKY_FITNESS_SERVER_PORT` | `3010` | Internal node backend port; leave as default |
 | `SPARKY_FITNESS_LOG_LEVEL` | `ERROR` | Backend log verbosity (e.g. ERROR, INFO, DEBUG) |
