@@ -1,11 +1,11 @@
 {
-  "generated": "2026-09-21T07:24:47Z",
+  "generated": "2026-09-28T07:08:15Z",
   "image": "sparkyfitness",
   "tags": {
     "latest": {
-      "app_version": "v1.7.2",
+      "app_version": "v1.7.3",
       "arch": "amd64",
-      "generated": "2026-09-21T07:22:02Z",
+      "generated": "2026-09-28T07:06:49Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
@@ -1157,7 +1157,7 @@
           {
             "name": "@expo/cli",
             "purl": "",
-            "version": "57.0.24"
+            "version": "57.0.27"
           },
           {
             "name": "@expo/code-signing-certificates",
@@ -1277,7 +1277,7 @@
           {
             "name": "@expo/router-server",
             "purl": "",
-            "version": "57.0.9"
+            "version": "57.0.11"
           },
           {
             "name": "@expo/schema-utils",
@@ -1302,7 +1302,7 @@
           {
             "name": "@expo/ui",
             "purl": "",
-            "version": "57.0.18"
+            "version": "57.0.20"
           },
           {
             "name": "@expo/ws-tunnel",
@@ -2102,7 +2102,7 @@
           {
             "name": "@workspace/shared",
             "purl": "",
-            "version": "1.7.2"
+            "version": "1.7.3"
           },
           {
             "name": "@xmldom/is-dom-node",
@@ -2307,7 +2307,7 @@
           {
             "name": "babel-preset-expo",
             "purl": "",
-            "version": "57.0.11"
+            "version": "57.0.13"
           },
           {
             "name": "babel-preset-jest",
@@ -2897,17 +2897,17 @@
           {
             "name": "expo",
             "purl": "",
-            "version": "57.0.22"
+            "version": "57.0.25"
           },
           {
             "name": "expo-asset",
             "purl": "",
-            "version": "57.0.17"
+            "version": "57.0.18"
           },
           {
             "name": "expo-constants",
             "purl": "",
-            "version": "57.0.18"
+            "version": "57.0.19"
           },
           {
             "name": "expo-file-system",
@@ -2927,7 +2927,7 @@
           {
             "name": "expo-linking",
             "purl": "",
-            "version": "57.0.10"
+            "version": "57.0.11"
           },
           {
             "name": "expo-modules-autolinking",
@@ -2937,12 +2937,12 @@
           {
             "name": "expo-modules-core",
             "purl": "",
-            "version": "57.0.18"
+            "version": "57.0.19"
           },
           {
             "name": "expo-modules-jsi",
             "purl": "",
-            "version": "57.1.0"
+            "version": "57.1.1"
           },
           {
             "name": "expo-network",
@@ -2967,7 +2967,7 @@
           {
             "name": "expo-widgets",
             "purl": "",
-            "version": "57.0.19"
+            "version": "57.0.21"
           },
           {
             "name": "exponential-backoff",
@@ -4577,7 +4577,7 @@
           {
             "name": "sparkyfitnessserver",
             "purl": "",
-            "version": "1.7.2"
+            "version": "1.7.3"
           },
           {
             "name": "sparse-bitfield",
