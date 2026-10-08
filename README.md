@@ -22,6 +22,13 @@ Self-hosted privacy-first fitness tracker on FreeBSD.
 | :--- | :--- | :--- |
 | `latest` | **Upstream Binary**. Built from official release. | Most users — recommended. |
 
+## Parts
+
+| Service | Image | Role | |
+|---|---|---|---|
+| **sparkyfitness** | `ghcr.io/daemonless/sparkyfitness:${SPARKYFITNESS_TAG:-latest}` |  | [docs](https://github.com/daemonless/sparkyfitness) |
+| **sparkyfitness-db** | `ghcr.io/daemonless/postgres:18` |  | [docs](https://github.com/daemonless/postgres) |
+
 ## Prerequisites
 Before deploying, ensure your host environment is ready. See the [Quick Start Guide](https://daemonless.io/guides/quick-start) for host setup instructions.
 
@@ -29,40 +36,110 @@ Before deploying, ensure your host environment is ready. See the [Quick Start Gu
 
 ### Podman Compose
 
-```yaml
-services:
-  sparkyfitness:
-    image: "ghcr.io/daemonless/sparkyfitness:latest"
-    container_name: sparkyfitness
-    environment:
-      - PUID=1000  # User ID for the application process
-      - PGID=1000  # Group ID for the application process
-      - TZ=${TZ:-UTC}  # Timezone for the container
-      - NODE_ENV=production  # Node runtime mode; leave as 'production'
-      - SPARKY_FITNESS_DB_HOST=127.0.0.1  # PostgreSQL host the backend connects to; leave as 127.0.0.1 (host networking)
-      - SPARKY_FITNESS_DB_PORT=5433  # PostgreSQL port; MUST match the sidecar's POSTGRES_PORT. Default 5433 (NOT 5432) so this can coexist with another host-networked Postgres (e.g. Immich on 5432) on the same host. ⚠ With network_mode: host, two Postgres on the same port silently collide — keep each service on a distinct port. NOTE: this only takes effect if the daemonless/postgres image honors POSTGRES_PORT (see project README / upstream fix); otherwise the sidecar falls back to 5432.
-      - SPARKY_FITNESS_DB_NAME=${SPARKY_FITNESS_DB_NAME}  # PostgreSQL database name
-      - SPARKY_FITNESS_DB_USER=${SPARKY_FITNESS_DB_USER}  # PostgreSQL superuser
-      - SPARKY_FITNESS_DB_PASSWORD=${SPARKY_FITNESS_DB_PASSWORD}  # PostgreSQL password
-      - SPARKY_FITNESS_APP_DB_USER=${SPARKY_FITNESS_APP_DB_USER}  # Limited app DB role the backend creates during migrations
-      - SPARKY_FITNESS_APP_DB_PASSWORD=${SPARKY_FITNESS_APP_DB_PASSWORD}  # Password for the limited app DB role
-      - SPARKY_FITNESS_API_ENCRYPTION_KEY=${SPARKY_FITNESS_API_ENCRYPTION_KEY}  # 64-char hex encryption key
-      - BETTER_AUTH_SECRET=${BETTER_AUTH_SECRET}  # Auth session signing secret
-      - SPARKY_FITNESS_FRONTEND_URL=${SPARKY_FITNESS_FRONTEND_URL}  # URL you will open this app at, e.g. http://myhost:3004 (sign-up fails if it does not match)
-      - SPARKY_FITNESS_SERVER_HOST=127.0.0.1  # Internal bind address for the node backend; leave as 127.0.0.1 (nginx proxies to it)
-      - SPARKY_FITNESS_SERVER_PORT=3010  # Internal node backend port; leave as default
-      - SPARKY_FITNESS_LOG_LEVEL=ERROR  # Backend log verbosity (e.g. ERROR, INFO, DEBUG)
-      - UPLOADS_LOCATION=  # Path to store user uploads (profile pictures, exercise images)
-      - BACKUPS_LOCATION=  # Path to store server backups
-      - DB_DATA_LOCATION=  # Path to store PostgreSQL data files
-    volumes:
-      - "/path/to/containers/sparkyfitness/uploads:/uploads"
-      - "/path/to/containers/sparkyfitness/backups:/backups"
-    # always (not unless-stopped) so FreeBSD's podman rc.d auto-starts it at boot
-    restart: always
+**1.** Save as `.env` and fill in what is empty:
+
+```env { data-zip-bundle="sparkyfitness-podman" data-zip-filename=".env" }
+# SparkyFitness for FreeBSD (Daemonless)
+# Copy to .env and edit.
+
+# Timezone (TZ identifier)
+# TZ=UTC
+
+# Where data lives on the host
+UPLOADS_LOCATION=/containers/sparkyfitness/uploads
+BACKUPS_LOCATION=/containers/sparkyfitness/backups
+DB_DATA_LOCATION=/containers/sparkyfitness/postgres
+
+# PostgreSQL superuser + database (provisioned by the sidecar)
+SPARKY_FITNESS_DB_NAME=sparkyfitness
+SPARKY_FITNESS_DB_USER=sparky
+# Change this to a random password! A-Za-z0-9 only.
+SPARKY_FITNESS_DB_PASSWORD=sparky
+
+# Limited app role the backend creates during migrations
+SPARKY_FITNESS_APP_DB_USER=sparky_app
+SPARKY_FITNESS_APP_DB_PASSWORD=sparky_app
+
+# Secrets: no defaults on purpose -- these become the catalog's install
+# defaults, and a shipped value would be shared by every install. Generate
+# your own, e.g. `openssl rand -hex 32` for each.
+SPARKY_FITNESS_API_ENCRYPTION_KEY=
+BETTER_AUTH_SECRET=
+
+# Public URL the browser uses to reach the app, e.g. http://myhost:3004.
+# No default on purpose: Better Auth compares this against the request origin
+# and rejects the sign-up POST when it does not match, so a shipped default is
+# wrong for everyone who does not browse from the server itself.
+SPARKY_FITNESS_FRONTEND_URL=
 ```
 
-Save as `compose.yaml`, then run `podman-compose up -d`.
+**2.** Save as `compose.yaml`:
+
+```yaml { data-zip-bundle="sparkyfitness-podman" data-zip-filename="compose.yaml" }
+name: sparkyfitness
+
+services:
+  sparkyfitness:
+    # Tag in a ${VAR} so the catalog exposes it as an image_tag variable and the
+    # install wizard can offer this repo's published versions. The database is
+    # pinned deliberately: retagging it would be a destructive migration.
+    image: ghcr.io/daemonless/sparkyfitness:${SPARKYFITNESS_TAG:-latest}
+    container_name: sparkyfitness
+    restart: unless-stopped
+    network_mode: host
+    depends_on:
+      - sparkyfitness-db
+
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=${TZ:-UTC}
+      - NODE_ENV=production
+      - SPARKY_FITNESS_DB_HOST=127.0.0.1
+      - SPARKY_FITNESS_DB_PORT=5433
+      - SPARKY_FITNESS_DB_NAME=${SPARKY_FITNESS_DB_NAME}
+      - SPARKY_FITNESS_DB_USER=${SPARKY_FITNESS_DB_USER}
+      - SPARKY_FITNESS_DB_PASSWORD=${SPARKY_FITNESS_DB_PASSWORD}
+      - SPARKY_FITNESS_APP_DB_USER=${SPARKY_FITNESS_APP_DB_USER}
+      - SPARKY_FITNESS_APP_DB_PASSWORD=${SPARKY_FITNESS_APP_DB_PASSWORD}
+      - SPARKY_FITNESS_API_ENCRYPTION_KEY=${SPARKY_FITNESS_API_ENCRYPTION_KEY}
+      - BETTER_AUTH_SECRET=${BETTER_AUTH_SECRET}
+      - SPARKY_FITNESS_FRONTEND_URL=${SPARKY_FITNESS_FRONTEND_URL}
+      - SPARKY_FITNESS_SERVER_HOST=127.0.0.1
+      - SPARKY_FITNESS_SERVER_PORT=3010
+      - SPARKY_FITNESS_LOG_LEVEL=ERROR
+
+    volumes:
+      - ${UPLOADS_LOCATION}:/uploads
+      - ${BACKUPS_LOCATION}:/backups
+
+  sparkyfitness-db:
+    image: ghcr.io/daemonless/postgres:18
+    container_name: sparkyfitness-db
+    restart: unless-stopped
+    network_mode: host
+
+    annotations:
+      org.freebsd.jail.allow.sysvipc: "true"
+
+    # Generic daemonless PostgreSQL 18 image. Only the superuser role + database
+    # are provisioned here; the SparkyFitness backend creates its own limited
+    # app role (SPARKY_FITNESS_APP_DB_USER) during migrations.
+    environment:
+      - POSTGRES_DB=${SPARKY_FITNESS_DB_NAME}
+      - POSTGRES_USER=${SPARKY_FITNESS_DB_USER}
+      - POSTGRES_PASSWORD=${SPARKY_FITNESS_DB_PASSWORD}
+      # Distinct port (NOT 5432) so this can run alongside another host-networked Postgres
+      # (e.g. Immich on 5432) without colliding. ⚠ Requires the daemonless/postgres image to
+      # honor POSTGRES_PORT — if it doesn't, it falls back to 5432 and WILL collide. Two
+      # host-net Postgres must never share a port.
+      - POSTGRES_PORT=5433
+
+    volumes:
+      - ${DB_DATA_LOCATION}:/var/lib/postgresql/data
+```
+
+Then run `podman-compose up -d`.
 
 ### AppJail Director
 **.env**:
@@ -73,24 +150,24 @@ Save as `compose.yaml`, then run `podman-compose up -d`.
 DIRECTOR_PROJECT=sparkyfitness
 PUID=1000
 PGID=1000
-TZ=${TZ:-UTC}
+TZ=UTC
 NODE_ENV=production
 SPARKY_FITNESS_DB_HOST=127.0.0.1
 SPARKY_FITNESS_DB_PORT=5433
-SPARKY_FITNESS_DB_NAME=${SPARKY_FITNESS_DB_NAME}
-SPARKY_FITNESS_DB_USER=${SPARKY_FITNESS_DB_USER}
-SPARKY_FITNESS_DB_PASSWORD=${SPARKY_FITNESS_DB_PASSWORD}
-SPARKY_FITNESS_APP_DB_USER=${SPARKY_FITNESS_APP_DB_USER}
-SPARKY_FITNESS_APP_DB_PASSWORD=${SPARKY_FITNESS_APP_DB_PASSWORD}
-SPARKY_FITNESS_API_ENCRYPTION_KEY=${SPARKY_FITNESS_API_ENCRYPTION_KEY}
-BETTER_AUTH_SECRET=${BETTER_AUTH_SECRET}
-SPARKY_FITNESS_FRONTEND_URL=${SPARKY_FITNESS_FRONTEND_URL}
+SPARKY_FITNESS_DB_NAME=sparkyfitness
+SPARKY_FITNESS_DB_USER=sparky
+SPARKY_FITNESS_DB_PASSWORD=sparky
+SPARKY_FITNESS_APP_DB_USER=sparky_app
+SPARKY_FITNESS_APP_DB_PASSWORD=sparky_app
+SPARKY_FITNESS_API_ENCRYPTION_KEY=<SPARKY_FITNESS_API_ENCRYPTION_KEY>
+BETTER_AUTH_SECRET=<BETTER_AUTH_SECRET>
+SPARKY_FITNESS_FRONTEND_URL=
 SPARKY_FITNESS_SERVER_HOST=127.0.0.1
 SPARKY_FITNESS_SERVER_PORT=3010
 SPARKY_FITNESS_LOG_LEVEL=ERROR
-UPLOADS_LOCATION=
-BACKUPS_LOCATION=
-DB_DATA_LOCATION=
+UPLOADS_LOCATION=/containers/sparkyfitness/uploads
+BACKUPS_LOCATION=/containers/sparkyfitness/backups
+DB_DATA_LOCATION=/containers/sparkyfitness/postgres
 ```
 
 **appjail-director.yml**:
@@ -147,9 +224,9 @@ services:
       - db_data: /var/lib/postgresql/data
 volumes:
   sparkyfitness_uploads:
-    device: '/path/to/containers/sparkyfitness/uploads'
+    device: '/containers/sparkyfitness/uploads'
   sparkyfitness_backups:
-    device: '/path/to/containers/sparkyfitness/backups'
+    device: '/containers/sparkyfitness/backups'
   db_data:
     device: !ENV '${DB_DATA_LOCATION}'
 ```
@@ -170,179 +247,6 @@ Save the files above, then run `appjail-director up`.
 
 
 
-### Podman CLI
-
-```bash
-podman run -d --name sparkyfitness \
-  -e PUID=1000 \
-  -e PGID=1000 \
-  -e TZ=${TZ:-UTC} \
-  -e NODE_ENV=production \
-  -e SPARKY_FITNESS_DB_HOST=127.0.0.1 \
-  -e SPARKY_FITNESS_DB_PORT=5433 \
-  -e SPARKY_FITNESS_DB_NAME=${SPARKY_FITNESS_DB_NAME} \
-  -e SPARKY_FITNESS_DB_USER=${SPARKY_FITNESS_DB_USER} \
-  -e SPARKY_FITNESS_DB_PASSWORD=${SPARKY_FITNESS_DB_PASSWORD} \
-  -e SPARKY_FITNESS_APP_DB_USER=${SPARKY_FITNESS_APP_DB_USER} \
-  -e SPARKY_FITNESS_APP_DB_PASSWORD=${SPARKY_FITNESS_APP_DB_PASSWORD} \
-  -e SPARKY_FITNESS_API_ENCRYPTION_KEY=${SPARKY_FITNESS_API_ENCRYPTION_KEY} \
-  -e BETTER_AUTH_SECRET=${BETTER_AUTH_SECRET} \
-  -e SPARKY_FITNESS_FRONTEND_URL=${SPARKY_FITNESS_FRONTEND_URL} \
-  -e SPARKY_FITNESS_SERVER_HOST=127.0.0.1 \
-  -e SPARKY_FITNESS_SERVER_PORT=3010 \
-  -e SPARKY_FITNESS_LOG_LEVEL=ERROR \
-  -e UPLOADS_LOCATION= \
-  -e BACKUPS_LOCATION= \
-  -e DB_DATA_LOCATION= \
-  -v /path/to/containers/sparkyfitness/uploads:/uploads \
-  -v /path/to/containers/sparkyfitness/backups:/backups \
-  ghcr.io/daemonless/sparkyfitness:latest
-```
-
-Save as `run.sh`, then run `sh run.sh`.
-
-### AppJail
-
-
-```bash
-appjail oci run -Pd \
-  -o overwrite=force \
-  -o container="args:--pull" \
-  -o virtualnet=":<random> default" \
-  -o nat \
-  -e PUID=1000 \
-  -e PGID=1000 \
-  -e TZ=${TZ:-UTC} \
-  -e NODE_ENV=production \
-  -e SPARKY_FITNESS_DB_HOST=127.0.0.1 \
-  -e SPARKY_FITNESS_DB_PORT=5433 \
-  -e SPARKY_FITNESS_DB_NAME=${SPARKY_FITNESS_DB_NAME} \
-  -e SPARKY_FITNESS_DB_USER=${SPARKY_FITNESS_DB_USER} \
-  -e SPARKY_FITNESS_DB_PASSWORD=${SPARKY_FITNESS_DB_PASSWORD} \
-  -e SPARKY_FITNESS_APP_DB_USER=${SPARKY_FITNESS_APP_DB_USER} \
-  -e SPARKY_FITNESS_APP_DB_PASSWORD=${SPARKY_FITNESS_APP_DB_PASSWORD} \
-  -e SPARKY_FITNESS_API_ENCRYPTION_KEY=${SPARKY_FITNESS_API_ENCRYPTION_KEY} \
-  -e BETTER_AUTH_SECRET=${BETTER_AUTH_SECRET} \
-  -e SPARKY_FITNESS_FRONTEND_URL=${SPARKY_FITNESS_FRONTEND_URL} \
-  -e SPARKY_FITNESS_SERVER_HOST=127.0.0.1 \
-  -e SPARKY_FITNESS_SERVER_PORT=3010 \
-  -e SPARKY_FITNESS_LOG_LEVEL=ERROR \
-  -e UPLOADS_LOCATION= \
-  -e BACKUPS_LOCATION= \
-  -e DB_DATA_LOCATION= \
-  -o fstab="/path/to/containers/sparkyfitness/uploads /uploads <pseudofs>" \
-  -o fstab="/path/to/containers/sparkyfitness/backups /backups <pseudofs>" \
-  ghcr.io/daemonless/sparkyfitness:latest sparkyfitness
-```
-
-Save the files above, then run `sh run.sh`.
-
-
-
-### Bastille
-
-> [!WARNING]
-> Bastille's OCI support is **experimental**. It requires `buildah` and shares the host network stack (`inherit`). Mount volumes with `--volume HOST JAIL`; without it, image-declared volumes are stored under `${bastille_volumesdir}/${jail}`.
-
-```yaml
-services:
-  sparkyfitness:
-    name: sparkyfitness
-    image: "ghcr.io/daemonless/sparkyfitness:latest"
-    network:
-      - mode: host
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=${TZ:-UTC}
-      - NODE_ENV=production
-      - SPARKY_FITNESS_DB_HOST=127.0.0.1
-      - SPARKY_FITNESS_DB_PORT=5433
-      - SPARKY_FITNESS_DB_NAME=${SPARKY_FITNESS_DB_NAME}
-      - SPARKY_FITNESS_DB_USER=${SPARKY_FITNESS_DB_USER}
-      - SPARKY_FITNESS_DB_PASSWORD=${SPARKY_FITNESS_DB_PASSWORD}
-      - SPARKY_FITNESS_APP_DB_USER=${SPARKY_FITNESS_APP_DB_USER}
-      - SPARKY_FITNESS_APP_DB_PASSWORD=${SPARKY_FITNESS_APP_DB_PASSWORD}
-      - SPARKY_FITNESS_API_ENCRYPTION_KEY=${SPARKY_FITNESS_API_ENCRYPTION_KEY}
-      - BETTER_AUTH_SECRET=${BETTER_AUTH_SECRET}
-      - SPARKY_FITNESS_FRONTEND_URL=${SPARKY_FITNESS_FRONTEND_URL}
-      - SPARKY_FITNESS_SERVER_HOST=127.0.0.1
-      - SPARKY_FITNESS_SERVER_PORT=3010
-      - SPARKY_FITNESS_LOG_LEVEL=ERROR
-      - UPLOADS_LOCATION=
-      - BACKUPS_LOCATION=
-      - DB_DATA_LOCATION=
-    volumes:
-      - "/path/to/containers/sparkyfitness/uploads:/uploads"
-      - "/path/to/containers/sparkyfitness/backups:/backups"
-```
-
-Save as `bastille-compose.yml`, then run `bastille up`. Or via CLI:
-
-```bash
-bastille create -O \
-  --env PUID=1000 \
-  --env PGID=1000 \
-  --env TZ=${TZ:-UTC} \
-  --env NODE_ENV=production \
-  --env SPARKY_FITNESS_DB_HOST=127.0.0.1 \
-  --env SPARKY_FITNESS_DB_PORT=5433 \
-  --env SPARKY_FITNESS_DB_NAME=${SPARKY_FITNESS_DB_NAME} \
-  --env SPARKY_FITNESS_DB_USER=${SPARKY_FITNESS_DB_USER} \
-  --env SPARKY_FITNESS_DB_PASSWORD=${SPARKY_FITNESS_DB_PASSWORD} \
-  --env SPARKY_FITNESS_APP_DB_USER=${SPARKY_FITNESS_APP_DB_USER} \
-  --env SPARKY_FITNESS_APP_DB_PASSWORD=${SPARKY_FITNESS_APP_DB_PASSWORD} \
-  --env SPARKY_FITNESS_API_ENCRYPTION_KEY=${SPARKY_FITNESS_API_ENCRYPTION_KEY} \
-  --env BETTER_AUTH_SECRET=${BETTER_AUTH_SECRET} \
-  --env SPARKY_FITNESS_FRONTEND_URL=${SPARKY_FITNESS_FRONTEND_URL} \
-  --env SPARKY_FITNESS_SERVER_HOST=127.0.0.1 \
-  --env SPARKY_FITNESS_SERVER_PORT=3010 \
-  --env SPARKY_FITNESS_LOG_LEVEL=ERROR \
-  --env UPLOADS_LOCATION= \
-  --env BACKUPS_LOCATION= \
-  --env DB_DATA_LOCATION= \
-  --volume /path/to/containers/sparkyfitness/uploads /uploads \
-  --volume /path/to/containers/sparkyfitness/backups /backups \
-  sparkyfitness ghcr.io/daemonless/sparkyfitness:latest inherit
-```
-
-### Ansible
-
-```yaml
-- name: Deploy sparkyfitness
-  containers.podman.podman_container:
-    name: sparkyfitness
-    image: "ghcr.io/daemonless/sparkyfitness:latest"
-    state: started
-    restart_policy: always
-    env:
-      PUID: "1000"
-      PGID: "1000"
-      TZ: "${TZ:-UTC}"
-      NODE_ENV: "production"
-      SPARKY_FITNESS_DB_HOST: "127.0.0.1"
-      SPARKY_FITNESS_DB_PORT: "5433"
-      SPARKY_FITNESS_DB_NAME: "${SPARKY_FITNESS_DB_NAME}"
-      SPARKY_FITNESS_DB_USER: "${SPARKY_FITNESS_DB_USER}"
-      SPARKY_FITNESS_DB_PASSWORD: "${SPARKY_FITNESS_DB_PASSWORD}"
-      SPARKY_FITNESS_APP_DB_USER: "${SPARKY_FITNESS_APP_DB_USER}"
-      SPARKY_FITNESS_APP_DB_PASSWORD: "${SPARKY_FITNESS_APP_DB_PASSWORD}"
-      SPARKY_FITNESS_API_ENCRYPTION_KEY: "${SPARKY_FITNESS_API_ENCRYPTION_KEY}"
-      BETTER_AUTH_SECRET: "${BETTER_AUTH_SECRET}"
-      SPARKY_FITNESS_FRONTEND_URL: "${SPARKY_FITNESS_FRONTEND_URL}"
-      SPARKY_FITNESS_SERVER_HOST: "127.0.0.1"
-      SPARKY_FITNESS_SERVER_PORT: "3010"
-      SPARKY_FITNESS_LOG_LEVEL: "ERROR"
-      UPLOADS_LOCATION: ""
-      BACKUPS_LOCATION: ""
-      DB_DATA_LOCATION: ""
-    volumes:
-      - "/path/to/containers/sparkyfitness/uploads:/uploads"
-      - "/path/to/containers/sparkyfitness/backups:/backups"
-```
-
-Save as `sparkyfitness-deploy.yaml`, then run `ansible-playbook sparkyfitness-deploy.yaml`.
-
 ## Parameters
 
 ### Environment Variables
@@ -351,24 +255,24 @@ Save as `sparkyfitness-deploy.yaml`, then run `ansible-playbook sparkyfitness-de
 |----------|---------|-------------|
 | `PUID` | `1000` | User ID for the application process |
 | `PGID` | `1000` | Group ID for the application process |
-| `TZ` | `${TZ:-UTC}` | Timezone for the container |
+| `TZ` | `UTC` | Timezone for the container |
 | `NODE_ENV` | `production` | Node runtime mode; leave as 'production' |
 | `SPARKY_FITNESS_DB_HOST` | `127.0.0.1` | PostgreSQL host the backend connects to; leave as 127.0.0.1 (host networking) |
 | `SPARKY_FITNESS_DB_PORT` | `5433` | PostgreSQL port; MUST match the sidecar's POSTGRES_PORT. Default 5433 (NOT 5432) so this can coexist with another host-networked Postgres (e.g. Immich on 5432) on the same host. ⚠ With network_mode: host, two Postgres on the same port silently collide — keep each service on a distinct port. NOTE: this only takes effect if the daemonless/postgres image honors POSTGRES_PORT (see project README / upstream fix); otherwise the sidecar falls back to 5432. |
-| `SPARKY_FITNESS_DB_NAME` | `${SPARKY_FITNESS_DB_NAME}` | PostgreSQL database name |
-| `SPARKY_FITNESS_DB_USER` | `${SPARKY_FITNESS_DB_USER}` | PostgreSQL superuser |
-| `SPARKY_FITNESS_DB_PASSWORD` | `${SPARKY_FITNESS_DB_PASSWORD}` | PostgreSQL password |
-| `SPARKY_FITNESS_APP_DB_USER` | `${SPARKY_FITNESS_APP_DB_USER}` | Limited app DB role the backend creates during migrations |
-| `SPARKY_FITNESS_APP_DB_PASSWORD` | `${SPARKY_FITNESS_APP_DB_PASSWORD}` | Password for the limited app DB role |
-| `SPARKY_FITNESS_API_ENCRYPTION_KEY` | `${SPARKY_FITNESS_API_ENCRYPTION_KEY}` | 64-char hex encryption key |
-| `BETTER_AUTH_SECRET` | `${BETTER_AUTH_SECRET}` | Auth session signing secret |
-| `SPARKY_FITNESS_FRONTEND_URL` | `${SPARKY_FITNESS_FRONTEND_URL}` | URL you will open this app at, e.g. http://myhost:3004 (sign-up fails if it does not match) |
+| `SPARKY_FITNESS_DB_NAME` | `sparkyfitness` | PostgreSQL database name |
+| `SPARKY_FITNESS_DB_USER` | `sparky` | PostgreSQL superuser |
+| `SPARKY_FITNESS_DB_PASSWORD` | `sparky` | PostgreSQL password |
+| `SPARKY_FITNESS_APP_DB_USER` | `sparky_app` | Limited app DB role the backend creates during migrations |
+| `SPARKY_FITNESS_APP_DB_PASSWORD` | `sparky_app` | Password for the limited app DB role |
+| `SPARKY_FITNESS_API_ENCRYPTION_KEY` | `<SPARKY_FITNESS_API_ENCRYPTION_KEY>` | 64-char hex encryption key |
+| `BETTER_AUTH_SECRET` | `<BETTER_AUTH_SECRET>` | Auth session signing secret |
+| `SPARKY_FITNESS_FRONTEND_URL` | `` | URL you will open this app at, e.g. http://myhost:3004 (sign-up fails if it does not match) |
 | `SPARKY_FITNESS_SERVER_HOST` | `127.0.0.1` | Internal bind address for the node backend; leave as 127.0.0.1 (nginx proxies to it) |
 | `SPARKY_FITNESS_SERVER_PORT` | `3010` | Internal node backend port; leave as default |
 | `SPARKY_FITNESS_LOG_LEVEL` | `ERROR` | Backend log verbosity (e.g. ERROR, INFO, DEBUG) |
-| `UPLOADS_LOCATION` | `` | Path to store user uploads (profile pictures, exercise images) |
-| `BACKUPS_LOCATION` | `` | Path to store server backups |
-| `DB_DATA_LOCATION` | `` | Path to store PostgreSQL data files |
+| `UPLOADS_LOCATION` | `/containers/sparkyfitness/uploads` | Path to store user uploads (profile pictures, exercise images) |
+| `BACKUPS_LOCATION` | `/containers/sparkyfitness/backups` | Path to store server backups |
+| `DB_DATA_LOCATION` | `/containers/sparkyfitness/postgres` | Path to store PostgreSQL data files |
 
 ### Volumes
 

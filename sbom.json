@@ -1,11 +1,11 @@
 {
-  "generated": "2026-09-28T07:08:15Z",
+  "generated": "2026-10-08T08:09:54Z",
   "image": "sparkyfitness",
   "tags": {
     "latest": {
-      "app_version": "v1.7.3",
+      "app_version": "v1.8.0",
       "arch": "amd64",
-      "generated": "2026-09-28T07:06:49Z",
+      "generated": "2026-10-08T08:08:35Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
@@ -42,7 +42,7 @@
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-clibs",
-            "version": "15.1p2"
+            "version": "15.1p4"
           },
           {
             "licenses": [
@@ -56,7 +56,7 @@
               "BSD-3-Clause"
             ],
             "name": "FreeBSD-dhclient",
-            "version": "15.1"
+            "version": "15.1p4"
           },
           {
             "licenses": [
@@ -91,7 +91,7 @@
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-libcasper",
-            "version": "15.1"
+            "version": "15.1p4"
           },
           {
             "licenses": [
@@ -154,7 +154,7 @@
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-openssl-lib",
-            "version": "15.1p3"
+            "version": "15.1p4"
           },
           {
             "licenses": [
@@ -189,7 +189,7 @@
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-runtime",
-            "version": "15.1p3"
+            "version": "15.1p4"
           },
           {
             "licenses": [
@@ -210,7 +210,7 @@
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-utilities",
-            "version": "15.1p2"
+            "version": "15.1p4"
           },
           {
             "licenses": [
@@ -238,7 +238,7 @@
               "PD"
             ],
             "name": "FreeBSD-zoneinfo",
-            "version": "15.1p2"
+            "version": "15.1p4"
           },
           {
             "licenses": [
@@ -266,7 +266,7 @@
               "MPL20"
             ],
             "name": "ca_root_nss",
-            "version": "3.129"
+            "version": "3.130"
           },
           {
             "licenses": [
@@ -2102,7 +2102,7 @@
           {
             "name": "@workspace/shared",
             "purl": "",
-            "version": "1.7.3"
+            "version": "1.8.0"
           },
           {
             "name": "@xmldom/is-dom-node",
@@ -4577,7 +4577,7 @@
           {
             "name": "sparkyfitnessserver",
             "purl": "",
-            "version": "1.7.3"
+            "version": "1.8.0"
           },
           {
             "name": "sparse-bitfield",
