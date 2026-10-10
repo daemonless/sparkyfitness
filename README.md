@@ -110,8 +110,8 @@ services:
       - SPARKY_FITNESS_LOG_LEVEL=ERROR
 
     volumes:
-      - ${UPLOADS_LOCATION}:/uploads
-      - ${BACKUPS_LOCATION}:/backups
+      - ${UPLOADS_LOCATION}:/app/server/uploads
+      - ${BACKUPS_LOCATION}:/app/server/backup
 
   sparkyfitness-db:
     image: ghcr.io/daemonless/postgres:18
@@ -207,8 +207,8 @@ services:
         - BACKUPS_LOCATION: !ENV '${BACKUPS_LOCATION}'
         - DB_DATA_LOCATION: !ENV '${DB_DATA_LOCATION}'
     volumes:
-      - sparkyfitness_uploads: /uploads
-      - sparkyfitness_backups: /backups
+      - sparkyfitness_uploads: /app/server/uploads
+      - sparkyfitness_backup: /app/server/backup
   sparkyfitness-db:
     name: sparkyfitness_db
     options:
@@ -225,8 +225,8 @@ services:
 volumes:
   sparkyfitness_uploads:
     device: '/containers/sparkyfitness/uploads'
-  sparkyfitness_backups:
-    device: '/containers/sparkyfitness/backups'
+  sparkyfitness_backup:
+    device: '/containers/sparkyfitness/backup'
   db_data:
     device: !ENV '${DB_DATA_LOCATION}'
 ```
@@ -278,8 +278,8 @@ Save the files above, then run `appjail-director up`.
 
 | Path | Description |
 |------|-------------|
-| `/uploads` | User-uploaded files (profile pictures, exercise images) |
-| `/backups` | Server backup data |
+| `/app/server/uploads` | User-uploaded files (profile pictures, exercise images) |
+| `/app/server/backup` | Server backup data |
 
 **Architectures:** amd64
 **User:** `bsd` (UID/GID via PUID/PGID, defaults to 1000:1000)

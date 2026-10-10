@@ -52,8 +52,8 @@ x-daemonless:
       SPARKY_FITNESS_SERVER_PORT: "Internal node backend port; leave as default"
       SPARKY_FITNESS_LOG_LEVEL: "Backend log verbosity (e.g. ERROR, INFO, DEBUG)"
     volumes:
-      /uploads: "User-uploaded files (profile pictures, exercise images)"
-      /backups: "Server backup data"
+      /app/server/uploads: "User-uploaded files (profile pictures, exercise images)"
+      /app/server/backup: "Server backup data"
     ports:
       3004: "Web UI (nginx reverse proxy)"
 
@@ -89,8 +89,8 @@ services:
       - SPARKY_FITNESS_LOG_LEVEL=ERROR
 
     volumes:
-      - ${UPLOADS_LOCATION}:/uploads
-      - ${BACKUPS_LOCATION}:/backups
+      - ${UPLOADS_LOCATION}:/app/server/uploads
+      - ${BACKUPS_LOCATION}:/app/server/backup
 
   sparkyfitness-db:
     image: ghcr.io/daemonless/postgres:18

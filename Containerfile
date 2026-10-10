@@ -68,7 +68,7 @@ RUN if [ ! -f /deploy/node_modules/.bin/tsx ]; then \
 FROM ghcr.io/daemonless/base:${BASE_VERSION}
 
 ARG FREEBSD_ARCH=amd64
-ARG PACKAGES="node24 nginx postgresql17-client"
+ARG PACKAGES="node24 nginx postgresql18-client"
 ARG UPSTREAM_URL="https://api.github.com/repos/CodeWithCJ/SparkyFitness/releases/latest"
 ARG UPSTREAM_JQ=".tag_name"
 ARG HEALTHCHECK_ENDPOINT="http://localhost:3004"
