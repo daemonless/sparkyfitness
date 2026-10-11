@@ -4,14 +4,22 @@ x-daemonless:
   class: "service"
   title: "SparkyFitness"
   icon: ":material-heart-pulse:"
-  category: "Health & Fitness"
+  category: "Productivity"
   description: "Self-hosted privacy-first fitness tracker on FreeBSD."
   upstream_url: "https://github.com/CodeWithCJ/SparkyFitness"
   web_url: "https://github.com/CodeWithCJ/SparkyFitness"
   user: "bsd"
   mlock: false
-  # Sidecar for the AppJail director bundle. Host networking so the app
-  # reaches PostgreSQL on 127.0.0.1, as under podman.
+  # sparkyfitness is the one people open; its database stays on the stack's
+  # private network, where it is found by the name fjord puts in
+  # SPARKY_FITNESS_DB_HOST (127.0.0.1 on host networking).
+  networking:
+    sparkyfitness: default
+    "*": private
+  hostnames:
+    sparkyfitness-db: SPARKY_FITNESS_DB_HOST
+  # Sidecar for the AppJail director bundle, named as the service is so fjord
+  # finds its jail by the service's name.
   appjail:
     director:
       options:
@@ -44,7 +52,10 @@ x-daemonless:
       BETTER_AUTH_SECRET: "Auth session signing secret"
       SPARKY_FITNESS_FRONTEND_URL: "URL you will open this app at, e.g. http://myhost:3004 (sign-up fails if it does not match)"
       NODE_ENV: "Node runtime mode; leave as 'production'"
-      SPARKY_FITNESS_DB_HOST: "PostgreSQL host the backend connects to; leave as 127.0.0.1 (host networking)"
+      SPARKY_FITNESS_DB_HOST:
+        desc: "Where the backend finds PostgreSQL (fjord sets this; 127.0.0.1 on host networking)"
+        level: advanced
+        optional: true
       SPARKY_FITNESS_DB_PORT: "PostgreSQL port; MUST match the sidecar's POSTGRES_PORT. Default 5433 (NOT 5432) so this can coexist with another host-networked Postgres (e.g. Immich on 5432) on the same host. ⚠ With network_mode: host, two Postgres on the same port silently collide — keep each service on a distinct port. NOTE: this only takes effect if the daemonless/postgres image honors POSTGRES_PORT (see project README / upstream fix); otherwise the sidecar falls back to 5432."
       SPARKY_FITNESS_APP_DB_USER: "Limited app DB role the backend creates during migrations"
       SPARKY_FITNESS_APP_DB_PASSWORD: "Password for the limited app DB role"
@@ -74,7 +85,7 @@ services:
       - PGID=1000
       - TZ=${TZ:-UTC}
       - NODE_ENV=production
-      - SPARKY_FITNESS_DB_HOST=127.0.0.1
+      - SPARKY_FITNESS_DB_HOST=${SPARKY_FITNESS_DB_HOST:-127.0.0.1}
       - SPARKY_FITNESS_DB_PORT=5433
       - SPARKY_FITNESS_DB_NAME=${SPARKY_FITNESS_DB_NAME}
       - SPARKY_FITNESS_DB_USER=${SPARKY_FITNESS_DB_USER}
