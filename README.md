@@ -95,7 +95,7 @@ services:
       - PGID=1000
       - TZ=${TZ:-UTC}
       - NODE_ENV=production
-      - SPARKY_FITNESS_DB_HOST=127.0.0.1
+      - SPARKY_FITNESS_DB_HOST=${SPARKY_FITNESS_DB_HOST:-127.0.0.1}
       - SPARKY_FITNESS_DB_PORT=5433
       - SPARKY_FITNESS_DB_NAME=${SPARKY_FITNESS_DB_NAME}
       - SPARKY_FITNESS_DB_USER=${SPARKY_FITNESS_DB_USER}
@@ -257,7 +257,7 @@ Save the files above, then run `appjail-director up`.
 | `PGID` | `1000` | Group ID for the application process |
 | `TZ` | `UTC` | Timezone for the container |
 | `NODE_ENV` | `production` | Node runtime mode; leave as 'production' |
-| `SPARKY_FITNESS_DB_HOST` | `127.0.0.1` | PostgreSQL host the backend connects to; leave as 127.0.0.1 (host networking) |
+| `SPARKY_FITNESS_DB_HOST` | `127.0.0.1` | Where the backend finds PostgreSQL (fjord sets this; 127.0.0.1 on host networking) |
 | `SPARKY_FITNESS_DB_PORT` | `5433` | PostgreSQL port; MUST match the sidecar's POSTGRES_PORT. Default 5433 (NOT 5432) so this can coexist with another host-networked Postgres (e.g. Immich on 5432) on the same host. ⚠ With network_mode: host, two Postgres on the same port silently collide — keep each service on a distinct port. NOTE: this only takes effect if the daemonless/postgres image honors POSTGRES_PORT (see project README / upstream fix); otherwise the sidecar falls back to 5432. |
 | `SPARKY_FITNESS_DB_NAME` | `sparkyfitness` | PostgreSQL database name |
 | `SPARKY_FITNESS_DB_USER` | `sparky` | PostgreSQL superuser |

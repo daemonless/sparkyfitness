@@ -1,11 +1,11 @@
 {
-  "generated": "2026-10-10T22:38:37Z",
+  "generated": "2026-10-11T10:55:20Z",
   "image": "sparkyfitness",
   "tags": {
     "latest": {
       "app_version": "v1.8.0",
       "arch": "amd64",
-      "generated": "2026-10-10T22:37:11Z",
+      "generated": "2026-10-11T10:54:11Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
