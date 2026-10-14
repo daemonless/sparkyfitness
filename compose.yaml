@@ -50,7 +50,9 @@ x-daemonless:
       SPARKY_FITNESS_DB_PASSWORD: "PostgreSQL password"
       SPARKY_FITNESS_API_ENCRYPTION_KEY: "64-char hex encryption key"
       BETTER_AUTH_SECRET: "Auth session signing secret"
-      SPARKY_FITNESS_FRONTEND_URL: "URL you will open this app at, e.g. http://myhost:3004 (sign-up fails if it does not match)"
+      SPARKY_FITNESS_FRONTEND_URL:
+        desc: "URL you will open this app at, e.g. http://myhost:3004 (sign-up fails if it does not match)"
+        public_url: true  # fjord fills in where the app lands
       NODE_ENV: "Node runtime mode; leave as 'production'"
       SPARKY_FITNESS_DB_HOST:
         desc: "Where the backend finds PostgreSQL (fjord sets this; 127.0.0.1 on host networking)"
