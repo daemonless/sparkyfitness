@@ -1,11 +1,11 @@
 {
-  "generated": "2026-10-14T09:13:21Z",
+  "generated": "2026-10-21T06:53:11Z",
   "image": "sparkyfitness",
   "tags": {
     "latest": {
-      "app_version": "v1.8.0",
+      "app_version": "v1.9.0",
       "arch": "amd64",
-      "generated": "2026-10-14T09:12:14Z",
+      "generated": "2026-10-21T06:51:58Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
@@ -189,7 +189,7 @@
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-runtime",
-            "version": "15.1p4"
+            "version": "15.1p5"
           },
           {
             "licenses": [
@@ -238,7 +238,7 @@
               "PD"
             ],
             "name": "FreeBSD-zoneinfo",
-            "version": "15.1p4"
+            "version": "15.1p5"
           },
           {
             "licenses": [
@@ -266,7 +266,7 @@
               "MPL20"
             ],
             "name": "ca_root_nss",
-            "version": "3.130"
+            "version": "3.131"
           },
           {
             "licenses": [
@@ -1095,6 +1095,11 @@
             "version": "3.0.4"
           },
           {
+            "name": "@emnapi/runtime",
+            "purl": "",
+            "version": "1.11.3"
+          },
+          {
             "name": "@esbuild/freebsd-arm64",
             "purl": "",
             "version": "0.28.1"
@@ -1348,6 +1353,61 @@
             "name": "@humanwhocodes/retry",
             "purl": "",
             "version": "0.4.3"
+          },
+          {
+            "name": "@img/colour",
+            "purl": "",
+            "version": "1.1.0"
+          },
+          {
+            "name": "@img/sharp-freebsd-wasm32",
+            "purl": "",
+            "version": "0.35.5"
+          },
+          {
+            "name": "@img/sharp-libvips-linux-arm64",
+            "purl": "",
+            "version": "1.3.4"
+          },
+          {
+            "name": "@img/sharp-libvips-linux-x64",
+            "purl": "",
+            "version": "1.3.4"
+          },
+          {
+            "name": "@img/sharp-libvips-linuxmusl-arm64",
+            "purl": "",
+            "version": "1.3.4"
+          },
+          {
+            "name": "@img/sharp-libvips-linuxmusl-x64",
+            "purl": "",
+            "version": "1.3.4"
+          },
+          {
+            "name": "@img/sharp-linux-arm64",
+            "purl": "",
+            "version": "0.35.5"
+          },
+          {
+            "name": "@img/sharp-linux-x64",
+            "purl": "",
+            "version": "0.35.5"
+          },
+          {
+            "name": "@img/sharp-linuxmusl-arm64",
+            "purl": "",
+            "version": "0.35.5"
+          },
+          {
+            "name": "@img/sharp-linuxmusl-x64",
+            "purl": "",
+            "version": "0.35.5"
+          },
+          {
+            "name": "@img/sharp-wasm32",
+            "purl": "",
+            "version": "0.35.5"
           },
           {
             "name": "@isaacs/cliui",
@@ -2102,7 +2162,7 @@
           {
             "name": "@workspace/shared",
             "purl": "",
-            "version": "1.8.0"
+            "version": "1.9.0"
           },
           {
             "name": "@xmldom/is-dom-node",
@@ -4500,6 +4560,11 @@
             "version": "2.2.0"
           },
           {
+            "name": "sharp",
+            "purl": "",
+            "version": "0.35.5"
+          },
+          {
             "name": "shebang-command",
             "purl": "",
             "version": "2.0.0"
@@ -4577,7 +4642,7 @@
           {
             "name": "sparkyfitnessserver",
             "purl": "",
-            "version": "1.8.0"
+            "version": "1.9.0"
           },
           {
             "name": "sparse-bitfield",
@@ -5161,12 +5226,12 @@
         "freebsd": 69,
         "go": 0,
         "java": 0,
-        "node": 929,
+        "node": 942,
         "php": 0,
         "python": 0,
         "ruby": 0,
         "rust": 0,
-        "total": 998
+        "total": 1011
       }
     }
   }
