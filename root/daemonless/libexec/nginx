@@ -1,5 +1,5 @@
 #!/bin/sh
-# SparkyFitness nginx s6 service
+# SparkyFitness nginx rcd unit
 
 echo "[INFO] Starting nginx..."
 exec nginx -g "daemon off;" -c /usr/local/etc/nginx/sparky.conf

@@ -9,7 +9,7 @@ ARG UPSTREAM_URL="https://api.github.com/repos/CodeWithCJ/SparkyFitness/releases
 # ==========================================================================
 # Stage 1: Builder
 # ==========================================================================
-FROM ghcr.io/daemonless/base:${BASE_VERSION} AS builder
+FROM ghcr.io/daemonless/base-exec:${BASE_VERSION} AS builder
 
 ARG UPSTREAM_URL
 
@@ -35,9 +35,12 @@ RUN --mount=type=secret,id=github_token \
       https://github.com/CodeWithCJ/SparkyFitness.git . && \
     echo "${VERSION}" > /tmp/app_version
 
-# Override pnpm supportedArchitectures — upstream locks to Linux only.
-# FreeBSD needs its own platform-specific binaries (e.g. @esbuild/freebsd-x64).
-RUN printf 'supportedArchitectures.os=current\nsupportedArchitectures.cpu=current\n' > .npmrc
+# sharp on FreeBSD is @img/sharp-freebsd-wasm32, a shim over @img/sharp-wasm32
+# (cpu: wasm32). Upstream's supportedArchitectures leaves wasm32 out, so the
+# server dies with 'Could not load the "sharp" module'. Fail if the list moves.
+RUN awk '{ print } /^  cpu:$/ { print "    - wasm32" }' pnpm-workspace.yaml > pnpm-workspace.yaml.new && \
+    mv pnpm-workspace.yaml.new pnpm-workspace.yaml && \
+    grep -q '^    - wasm32$' pnpm-workspace.yaml
 
 # Install workspace dependencies for frontend + server
 RUN pnpm install --frozen-lockfile \
@@ -59,7 +62,7 @@ RUN if [ ! -f /deploy/node_modules/.bin/tsx ]; then \
 # ==========================================================================
 # Stage 2: Runtime
 # ==========================================================================
-FROM ghcr.io/daemonless/base:${BASE_VERSION}
+FROM ghcr.io/daemonless/base-rcd:${BASE_VERSION}
 
 ARG FREEBSD_ARCH=amd64
 ARG PACKAGES="node24 nginx postgresql18-client"
@@ -106,10 +109,8 @@ RUN chown -R bsd:bsd /app /uploads /backups && \
 
 # Copy service files (s6 runners, nginx config, healthz)
 COPY root/ /
-RUN chmod +x /etc/services.d/*/run \
-              /etc/services.d/sparky-backend/data/check \
-              /etc/cont-init.d/* \
-              /healthz 2>/dev/null || true
+RUN chmod +x /daemonless/libexec/* /daemonless/init.d/*
+RUN chmod +x /healthz
 
 WORKDIR /app
 
