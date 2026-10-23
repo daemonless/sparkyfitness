@@ -1,11 +1,11 @@
 {
-  "generated": "2026-10-21T06:53:11Z",
+  "generated": "2026-10-23T16:58:44Z",
   "image": "sparkyfitness",
   "tags": {
     "latest": {
       "app_version": "v1.9.0",
       "arch": "amd64",
-      "generated": "2026-10-21T06:51:58Z",
+      "generated": "2026-10-23T16:54:01Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
@@ -174,13 +174,6 @@
             "licenses": [
               "BSD2CLAUSE"
             ],
-            "name": "FreeBSD-rc",
-            "version": "15.1"
-          },
-          {
-            "licenses": [
-              "BSD2CLAUSE"
-            ],
             "name": "FreeBSD-resolvconf",
             "version": "15.1"
           },
@@ -274,13 +267,6 @@
             ],
             "name": "corepack",
             "version": "0.36.0"
-          },
-          {
-            "licenses": [
-              "ISCL"
-            ],
-            "name": "execline",
-            "version": "2.9.8.1"
           },
           {
             "licenses": [
@@ -404,7 +390,7 @@
               "BSD2CLAUSE"
             ],
             "name": "nginx",
-            "version": "1.30.5_2,3"
+            "version": "1.30.6,3"
           },
           {
             "licenses": [
@@ -450,18 +436,11 @@
           },
           {
             "licenses": [
-              "ISCL"
-            ],
-            "name": "s6",
-            "version": "2.14.0.1"
-          },
-          {
-            "licenses": [
               "MIT",
               "APACHE20"
             ],
             "name": "simdjson",
-            "version": "5.0.1"
+            "version": "5.0.5"
           },
           {
             "licenses": [
@@ -470,13 +449,6 @@
             ],
             "name": "simdutf",
             "version": "9.2.1"
-          },
-          {
-            "licenses": [
-              "ISCL"
-            ],
-            "name": "skalibs",
-            "version": "2.14.5.1"
           },
           {
             "licenses": [
@@ -1406,6 +1378,11 @@
           },
           {
             "name": "@img/sharp-wasm32",
+            "purl": "",
+            "version": "0.35.5"
+          },
+          {
+            "name": "@img/sharp-webcontainers-wasm32",
             "purl": "",
             "version": "0.35.5"
           },
@@ -5223,15 +5200,15 @@
       "source": "upstream",
       "summary": {
         "dotnet": 0,
-        "freebsd": 69,
+        "freebsd": 65,
         "go": 0,
         "java": 0,
-        "node": 942,
+        "node": 943,
         "php": 0,
         "python": 0,
         "ruby": 0,
         "rust": 0,
-        "total": 1011
+        "total": 1008
       }
     }
   }
