@@ -1,11 +1,11 @@
 {
-  "generated": "2026-10-23T16:58:44Z",
+  "generated": "2026-10-24T08:55:05Z",
   "image": "sparkyfitness",
   "tags": {
     "latest": {
       "app_version": "v1.9.0",
       "arch": "amd64",
-      "generated": "2026-10-23T16:54:01Z",
+      "generated": "2026-10-24T08:52:26Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
@@ -372,14 +372,6 @@
           },
           {
             "licenses": [
-              "MIT",
-              "APACHE20"
-            ],
-            "name": "merve",
-            "version": "1.2.2_3"
-          },
-          {
-            "licenses": [
               "MIT"
             ],
             "name": "nbytes",
@@ -397,7 +389,7 @@
               "MIT"
             ],
             "name": "node24",
-            "version": "24.21.0_1"
+            "version": "24.21.0_3"
           },
           {
             "licenses": [
@@ -441,14 +433,6 @@
             ],
             "name": "simdjson",
             "version": "5.0.5"
-          },
-          {
-            "licenses": [
-              "MIT",
-              "APACHE20"
-            ],
-            "name": "simdutf",
-            "version": "9.2.1"
           },
           {
             "licenses": [
@@ -5200,7 +5184,7 @@
       "source": "upstream",
       "summary": {
         "dotnet": 0,
-        "freebsd": 65,
+        "freebsd": 63,
         "go": 0,
         "java": 0,
         "node": 943,
@@ -5208,7 +5192,7 @@
         "python": 0,
         "ruby": 0,
         "rust": 0,
-        "total": 1008
+        "total": 1006
       }
     }
   }
