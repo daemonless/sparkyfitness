@@ -1,11 +1,11 @@
 {
-  "generated": "2026-10-24T08:55:05Z",
+  "generated": "2026-10-29T07:08:44Z",
   "image": "sparkyfitness",
   "tags": {
     "latest": {
-      "app_version": "v1.9.0",
+      "app_version": "v1.10.0",
       "arch": "amd64",
-      "generated": "2026-10-24T08:52:26Z",
+      "generated": "2026-10-29T07:07:31Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
@@ -182,7 +182,7 @@
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-runtime",
-            "version": "15.1p5"
+            "version": "15.1p6"
           },
           {
             "licenses": [
@@ -245,7 +245,7 @@
               "MIT"
             ],
             "name": "brotli",
-            "version": "1.2.0,1"
+            "version": "1.2.1,1"
           },
           {
             "licenses": [
@@ -259,7 +259,7 @@
               "MPL20"
             ],
             "name": "ca_root_nss",
-            "version": "3.131"
+            "version": "3.132"
           },
           {
             "licenses": [
@@ -463,32 +463,32 @@
           {
             "name": "@ai-sdk/anthropic",
             "purl": "",
-            "version": "4.0.53"
+            "version": "4.0.87"
           },
           {
             "name": "@ai-sdk/gateway",
             "purl": "",
-            "version": "4.0.80"
+            "version": "4.0.123"
           },
           {
             "name": "@ai-sdk/google",
             "purl": "",
-            "version": "4.0.69"
+            "version": "4.0.104"
           },
           {
             "name": "@ai-sdk/openai",
             "purl": "",
-            "version": "4.0.66"
+            "version": "4.0.101"
           },
           {
             "name": "@ai-sdk/provider",
             "purl": "",
-            "version": "4.0.14"
+            "version": "4.0.33"
           },
           {
             "name": "@ai-sdk/provider-utils",
             "purl": "",
-            "version": "5.0.40"
+            "version": "5.0.67"
           },
           {
             "name": "@apidevtools/json-schema-ref-parser",
@@ -518,7 +518,7 @@
           {
             "name": "@authenio/xml-encryption",
             "purl": "",
-            "version": "2.0.2"
+            "version": "6.0.2"
           },
           {
             "name": "@babel/code-frame",
@@ -558,7 +558,7 @@
           {
             "name": "@babel/helper-create-regexp-features-plugin",
             "purl": "",
-            "version": "7.29.7"
+            "version": "7.29.10"
           },
           {
             "name": "@babel/helper-define-polyfill-provider",
@@ -638,12 +638,12 @@
           {
             "name": "@babel/parser",
             "purl": "",
-            "version": "7.29.8"
+            "version": "7.29.9"
           },
           {
             "name": "@babel/plugin-proposal-decorators",
             "purl": "",
-            "version": "7.29.0"
+            "version": "7.29.7"
           },
           {
             "name": "@babel/plugin-proposal-export-default-from",
@@ -673,7 +673,7 @@
           {
             "name": "@babel/plugin-syntax-decorators",
             "purl": "",
-            "version": "7.28.6"
+            "version": "7.29.7"
           },
           {
             "name": "@babel/plugin-syntax-dynamic-import",
@@ -708,7 +708,7 @@
           {
             "name": "@babel/plugin-syntax-jsx",
             "purl": "",
-            "version": "7.28.6"
+            "version": "7.29.7"
           },
           {
             "name": "@babel/plugin-syntax-logical-assignment-operators",
@@ -753,7 +753,7 @@
           {
             "name": "@babel/plugin-syntax-typescript",
             "purl": "",
-            "version": "7.28.6"
+            "version": "7.29.7"
           },
           {
             "name": "@babel/plugin-transform-arrow-functions",
@@ -873,7 +873,7 @@
           {
             "name": "@babel/plugin-transform-react-jsx-development",
             "purl": "",
-            "version": "7.27.1"
+            "version": "7.29.7"
           },
           {
             "name": "@babel/plugin-transform-react-jsx-self",
@@ -888,7 +888,7 @@
           {
             "name": "@babel/plugin-transform-react-pure-annotations",
             "purl": "",
-            "version": "7.27.1"
+            "version": "7.29.7"
           },
           {
             "name": "@babel/plugin-transform-regenerator",
@@ -913,7 +913,7 @@
           {
             "name": "@babel/plugin-transform-typescript",
             "purl": "",
-            "version": "7.28.6"
+            "version": "7.29.9"
           },
           {
             "name": "@babel/plugin-transform-unicode-regex",
@@ -928,7 +928,7 @@
           {
             "name": "@babel/runtime",
             "purl": "",
-            "version": "7.29.7"
+            "version": "7.29.10"
           },
           {
             "name": "@babel/template",
@@ -938,7 +938,7 @@
           {
             "name": "@babel/traverse",
             "purl": "",
-            "version": "7.29.8"
+            "version": "7.29.10"
           },
           {
             "name": "@babel/types",
@@ -953,67 +953,67 @@
           {
             "name": "@better-auth/api-key",
             "purl": "",
-            "version": "1.7.4"
+            "version": "1.7.12"
           },
           {
             "name": "@better-auth/core",
             "purl": "",
-            "version": "1.7.4"
+            "version": "1.7.12"
           },
           {
             "name": "@better-auth/drizzle-adapter",
             "purl": "",
-            "version": "1.7.4"
+            "version": "1.7.12"
           },
           {
             "name": "@better-auth/expo",
             "purl": "",
-            "version": "1.7.4"
+            "version": "1.7.12"
           },
           {
             "name": "@better-auth/kysely-adapter",
             "purl": "",
-            "version": "1.7.4"
+            "version": "1.7.12"
           },
           {
             "name": "@better-auth/memory-adapter",
             "purl": "",
-            "version": "1.7.4"
+            "version": "1.7.12"
           },
           {
             "name": "@better-auth/mongo-adapter",
             "purl": "",
-            "version": "1.7.4"
+            "version": "1.7.12"
           },
           {
             "name": "@better-auth/passkey",
             "purl": "",
-            "version": "1.7.4"
+            "version": "1.7.12"
           },
           {
             "name": "@better-auth/prisma-adapter",
             "purl": "",
-            "version": "1.7.4"
+            "version": "1.7.12"
           },
           {
             "name": "@better-auth/sso",
             "purl": "",
-            "version": "1.7.4"
+            "version": "1.7.12"
           },
           {
             "name": "@better-auth/telemetry",
             "purl": "",
-            "version": "1.7.4"
+            "version": "1.7.12"
           },
           {
             "name": "@better-auth/utils",
             "purl": "",
-            "version": "0.3.1"
+            "version": "0.5.0"
           },
           {
             "name": "@better-fetch/fetch",
             "purl": "",
-            "version": "1.1.21"
+            "version": "1.3.2"
           },
           {
             "name": "@cacheable/memory",
@@ -1118,7 +1118,7 @@
           {
             "name": "@expo/cli",
             "purl": "",
-            "version": "57.0.27"
+            "version": "57.0.32"
           },
           {
             "name": "@expo/code-signing-certificates",
@@ -1128,12 +1128,12 @@
           {
             "name": "@expo/config",
             "purl": "",
-            "version": "57.0.9"
+            "version": "57.0.10"
           },
           {
             "name": "@expo/config-plugins",
             "purl": "",
-            "version": "57.0.9"
+            "version": "57.0.11"
           },
           {
             "name": "@expo/config-types",
@@ -1143,7 +1143,7 @@
           {
             "name": "@expo/devcert",
             "purl": "",
-            "version": "1.2.1"
+            "version": "1.2.2"
           },
           {
             "name": "@expo/devtools",
@@ -1168,17 +1168,17 @@
           {
             "name": "@expo/fingerprint",
             "purl": "",
-            "version": "0.20.13"
+            "version": "0.20.14"
           },
           {
             "name": "@expo/image-utils",
             "purl": "",
-            "version": "0.11.5"
+            "version": "0.11.6"
           },
           {
             "name": "@expo/inline-modules",
             "purl": "",
-            "version": "0.1.7"
+            "version": "0.1.8"
           },
           {
             "name": "@expo/json-file",
@@ -1188,7 +1188,7 @@
           {
             "name": "@expo/local-build-cache-provider",
             "purl": "",
-            "version": "57.0.8"
+            "version": "57.0.9"
           },
           {
             "name": "@expo/log-box",
@@ -1203,22 +1203,22 @@
           {
             "name": "@expo/metro-config",
             "purl": "",
-            "version": "57.0.12"
+            "version": "57.0.13"
           },
           {
             "name": "@expo/metro-file-map",
             "purl": "",
-            "version": "57.0.3"
+            "version": "57.0.4"
           },
           {
             "name": "@expo/osascript",
             "purl": "",
-            "version": "2.7.1"
+            "version": "2.8.1"
           },
           {
             "name": "@expo/package-manager",
             "purl": "",
-            "version": "1.13.1"
+            "version": "1.14.2"
           },
           {
             "name": "@expo/plist",
@@ -1228,17 +1228,17 @@
           {
             "name": "@expo/prebuild-config",
             "purl": "",
-            "version": "57.0.16"
+            "version": "57.0.19"
           },
           {
             "name": "@expo/require-utils",
             "purl": "",
-            "version": "57.0.5"
+            "version": "57.0.6"
           },
           {
             "name": "@expo/router-server",
             "purl": "",
-            "version": "57.0.11"
+            "version": "57.0.14"
           },
           {
             "name": "@expo/schema-utils",
@@ -1248,7 +1248,7 @@
           {
             "name": "@expo/sdk-runtime-versions",
             "purl": "",
-            "version": "1.0.0"
+            "version": "1.0.1"
           },
           {
             "name": "@expo/spawn-async",
@@ -1263,22 +1263,22 @@
           {
             "name": "@expo/ui",
             "purl": "",
-            "version": "57.0.20"
+            "version": "57.0.26"
           },
           {
             "name": "@expo/ws-tunnel",
             "purl": "",
-            "version": "2.0.0"
+            "version": "2.0.1"
           },
           {
             "name": "@expo/xcpretty",
             "purl": "",
-            "version": "4.4.4"
+            "version": "4.4.7"
           },
           {
             "name": "@garmin/fitsdk",
             "purl": "",
-            "version": "21.214.0"
+            "version": "21.218.0"
           },
           {
             "name": "@hexagon/base64",
@@ -1468,12 +1468,12 @@
           {
             "name": "@modelcontextprotocol/sdk",
             "purl": "",
-            "version": "1.30.0"
+            "version": "1.32.1"
           },
           {
             "name": "@mongodb-js/saslprep",
             "purl": "",
-            "version": "1.5.4"
+            "version": "1.6.1"
           },
           {
             "name": "@my-scope/package-a",
@@ -1498,7 +1498,7 @@
           {
             "name": "@nodable/entities",
             "purl": "",
-            "version": "3.0.0"
+            "version": "3.1.0"
           },
           {
             "name": "@opentelemetry/api",
@@ -1506,14 +1506,9 @@
             "version": "1.9.1"
           },
           {
-            "name": "@opentelemetry/semantic-conventions",
-            "purl": "",
-            "version": "1.43.0"
-          },
-          {
             "name": "@oxc-project/types",
             "purl": "",
-            "version": "0.149.0"
+            "version": "0.155.0"
           },
           {
             "name": "@paralleldrive/cuid2",
@@ -1523,57 +1518,62 @@
           {
             "name": "@peculiar/asn1-android",
             "purl": "",
-            "version": "2.6.0"
+            "version": "2.11.0"
           },
           {
             "name": "@peculiar/asn1-cms",
             "purl": "",
-            "version": "2.6.1"
+            "version": "2.11.0"
           },
           {
             "name": "@peculiar/asn1-csr",
             "purl": "",
-            "version": "2.6.1"
+            "version": "2.11.0"
           },
           {
             "name": "@peculiar/asn1-ecc",
             "purl": "",
-            "version": "2.6.1"
+            "version": "2.11.0"
           },
           {
             "name": "@peculiar/asn1-pfx",
             "purl": "",
-            "version": "2.6.1"
+            "version": "2.11.0"
           },
           {
             "name": "@peculiar/asn1-pkcs8",
             "purl": "",
-            "version": "2.6.1"
+            "version": "2.11.0"
           },
           {
             "name": "@peculiar/asn1-pkcs9",
             "purl": "",
-            "version": "2.6.1"
+            "version": "2.11.0"
           },
           {
             "name": "@peculiar/asn1-rsa",
             "purl": "",
-            "version": "2.6.1"
+            "version": "2.11.0"
           },
           {
             "name": "@peculiar/asn1-schema",
             "purl": "",
-            "version": "2.6.0"
+            "version": "2.11.0"
           },
           {
             "name": "@peculiar/asn1-x509",
             "purl": "",
-            "version": "2.6.1"
+            "version": "2.11.0"
           },
           {
             "name": "@peculiar/asn1-x509-attr",
             "purl": "",
-            "version": "2.6.1"
+            "version": "2.11.0"
+          },
+          {
+            "name": "@peculiar/utils",
+            "purl": "",
+            "version": "2.0.3"
           },
           {
             "name": "@peculiar/x509",
@@ -1583,7 +1583,7 @@
           {
             "name": "@radix-ui/primitive",
             "purl": "",
-            "version": "1.1.7"
+            "version": "1.2.0"
           },
           {
             "name": "@radix-ui/react-compose-refs",
@@ -1593,27 +1593,27 @@
           {
             "name": "@radix-ui/react-context",
             "purl": "",
-            "version": "1.2.2"
+            "version": "1.3.0"
           },
           {
             "name": "@radix-ui/react-dialog",
             "purl": "",
-            "version": "1.1.23"
+            "version": "1.3.1"
           },
           {
             "name": "@radix-ui/react-dismissable-layer",
             "purl": "",
-            "version": "1.1.19"
+            "version": "1.2.1"
           },
           {
             "name": "@radix-ui/react-focus-guards",
             "purl": "",
-            "version": "1.1.6"
+            "version": "1.2.0"
           },
           {
             "name": "@radix-ui/react-focus-scope",
             "purl": "",
-            "version": "1.1.16"
+            "version": "1.3.1"
           },
           {
             "name": "@radix-ui/react-id",
@@ -1623,32 +1623,32 @@
           {
             "name": "@radix-ui/react-portal",
             "purl": "",
-            "version": "1.1.17"
+            "version": "1.2.0"
           },
           {
             "name": "@radix-ui/react-presence",
             "purl": "",
-            "version": "1.1.10"
+            "version": "1.1.11"
           },
           {
             "name": "@radix-ui/react-primitive",
             "purl": "",
-            "version": "2.1.10"
+            "version": "2.2.0"
           },
           {
             "name": "@radix-ui/react-slot",
             "purl": "",
-            "version": "1.3.3"
+            "version": "1.5.0"
           },
           {
             "name": "@radix-ui/react-use-callback-ref",
             "purl": "",
-            "version": "1.1.4"
+            "version": "1.1.5"
           },
           {
             "name": "@radix-ui/react-use-controllable-state",
             "purl": "",
-            "version": "1.2.6"
+            "version": "1.3.0"
           },
           {
             "name": "@radix-ui/react-use-effect-event",
@@ -1743,27 +1743,27 @@
           {
             "name": "@rolldown/binding-freebsd-x64",
             "purl": "",
-            "version": "1.2.8"
+            "version": "1.2.15"
           },
           {
             "name": "@rolldown/binding-linux-arm64-gnu",
             "purl": "",
-            "version": "1.2.8"
+            "version": "1.2.15"
           },
           {
             "name": "@rolldown/binding-linux-arm64-musl",
             "purl": "",
-            "version": "1.2.8"
+            "version": "1.2.15"
           },
           {
             "name": "@rolldown/binding-linux-x64-gnu",
             "purl": "",
-            "version": "1.2.8"
+            "version": "1.2.15"
           },
           {
             "name": "@rolldown/binding-linux-x64-musl",
             "purl": "",
-            "version": "1.2.8"
+            "version": "1.2.15"
           },
           {
             "name": "@rolldown/pluginutils",
@@ -1863,7 +1863,7 @@
           {
             "name": "@types/estree",
             "purl": "",
-            "version": "1.0.8"
+            "version": "1.0.9"
           },
           {
             "name": "@types/express",
@@ -1913,12 +1913,12 @@
           {
             "name": "@types/node",
             "purl": "",
-            "version": "25.9.6"
+            "version": "26.6.5"
           },
           {
             "name": "@types/nodemailer",
             "purl": "",
-            "version": "8.0.1"
+            "version": "8.0.2"
           },
           {
             "name": "@types/papaparse",
@@ -1988,57 +1988,57 @@
           {
             "name": "@typescript-eslint/eslint-plugin",
             "purl": "",
-            "version": "8.70.0"
+            "version": "8.72.0"
           },
           {
             "name": "@typescript-eslint/parser",
             "purl": "",
-            "version": "8.70.0"
+            "version": "8.72.0"
           },
           {
             "name": "@typescript-eslint/project-service",
             "purl": "",
-            "version": "8.70.0"
+            "version": "8.72.0"
           },
           {
             "name": "@typescript-eslint/scope-manager",
             "purl": "",
-            "version": "8.70.0"
+            "version": "8.72.0"
           },
           {
             "name": "@typescript-eslint/tsconfig-utils",
             "purl": "",
-            "version": "8.70.0"
+            "version": "8.72.0"
           },
           {
             "name": "@typescript-eslint/type-utils",
             "purl": "",
-            "version": "8.70.0"
+            "version": "8.72.0"
           },
           {
             "name": "@typescript-eslint/types",
             "purl": "",
-            "version": "8.70.0"
+            "version": "8.72.0"
           },
           {
             "name": "@typescript-eslint/typescript-estree",
             "purl": "",
-            "version": "8.70.0"
+            "version": "8.72.0"
           },
           {
             "name": "@typescript-eslint/utils",
             "purl": "",
-            "version": "8.70.0"
+            "version": "8.72.0"
           },
           {
             "name": "@typescript-eslint/visitor-keys",
             "purl": "",
-            "version": "8.70.0"
+            "version": "8.72.0"
           },
           {
             "name": "@ungap/structured-clone",
             "purl": "",
-            "version": "1.3.0"
+            "version": "1.4.0"
           },
           {
             "name": "@vercel/oidc",
@@ -2048,27 +2048,27 @@
           {
             "name": "@vitest/coverage-v8",
             "purl": "",
-            "version": "5.0.0"
+            "version": "5.0.5"
           },
           {
             "name": "@vitest/istanbul-lib-coverage",
             "purl": "",
-            "version": "1.0.1"
+            "version": "1.0.2"
           },
           {
             "name": "@vitest/istanbul-lib-report",
             "purl": "",
-            "version": "1.0.1"
+            "version": "1.0.2"
           },
           {
             "name": "@vitest/mocker",
             "purl": "",
-            "version": "5.0.0"
+            "version": "5.0.5"
           },
           {
             "name": "@vitest/spy",
             "purl": "",
-            "version": "5.0.0"
+            "version": "5.0.5"
           },
           {
             "name": "@vue/compiler-core",
@@ -2123,7 +2123,7 @@
           {
             "name": "@workspace/shared",
             "purl": "",
-            "version": "1.9.0"
+            "version": "1.10.0"
           },
           {
             "name": "@xmldom/is-dom-node",
@@ -2133,7 +2133,7 @@
           {
             "name": "@xmldom/xmldom",
             "purl": "",
-            "version": "0.8.11"
+            "version": "0.8.15"
           },
           {
             "name": "abort-controller",
@@ -2168,7 +2168,7 @@
           {
             "name": "ai",
             "purl": "",
-            "version": "7.0.99"
+            "version": "7.0.150"
           },
           {
             "name": "ajv",
@@ -2241,14 +2241,9 @@
             "version": "2.0.6"
           },
           {
-            "name": "asn1",
-            "purl": "",
-            "version": "0.2.6"
-          },
-          {
             "name": "asn1js",
             "purl": "",
-            "version": "3.0.7"
+            "version": "3.1.0"
           },
           {
             "name": "assertion-error",
@@ -2258,7 +2253,7 @@
           {
             "name": "ast-v8-to-istanbul",
             "purl": "",
-            "version": "1.0.6"
+            "version": "1.0.7"
           },
           {
             "name": "asynckit",
@@ -2308,7 +2303,7 @@
           {
             "name": "babel-plugin-react-native-web",
             "purl": "",
-            "version": "0.21.2"
+            "version": "0.21.4"
           },
           {
             "name": "babel-plugin-syntax-hermes-parser",
@@ -2328,7 +2323,7 @@
           {
             "name": "babel-preset-expo",
             "purl": "",
-            "version": "57.0.13"
+            "version": "57.0.16"
           },
           {
             "name": "babel-preset-jest",
@@ -2348,7 +2343,7 @@
           {
             "name": "baseline-browser-mapping",
             "purl": "",
-            "version": "2.11.21"
+            "version": "2.11.31"
           },
           {
             "name": "bcryptjs",
@@ -2363,12 +2358,12 @@
           {
             "name": "better-auth",
             "purl": "",
-            "version": "1.7.4"
+            "version": "1.7.12"
           },
           {
             "name": "better-call",
             "purl": "",
-            "version": "1.4.0"
+            "version": "1.4.4"
           },
           {
             "name": "big-integer",
@@ -2388,7 +2383,7 @@
           {
             "name": "body-parser",
             "purl": "",
-            "version": "2.2.2"
+            "version": "2.4.0"
           },
           {
             "name": "bplist-creator",
@@ -2413,7 +2408,7 @@
           {
             "name": "browserslist",
             "purl": "",
-            "version": "4.28.9"
+            "version": "4.29.4"
           },
           {
             "name": "bser",
@@ -2423,7 +2418,7 @@
           {
             "name": "bson",
             "purl": "",
-            "version": "7.3.2"
+            "version": "7.3.3"
           },
           {
             "name": "buffer-from",
@@ -2448,7 +2443,7 @@
           {
             "name": "call-bind",
             "purl": "",
-            "version": "1.0.8"
+            "version": "1.0.9"
           },
           {
             "name": "call-bind-apply-helpers",
@@ -2468,12 +2463,12 @@
           {
             "name": "caniuse-lite",
             "purl": "",
-            "version": "1.0.30001810"
+            "version": "1.0.30001819"
           },
           {
             "name": "chai",
             "purl": "",
-            "version": "6.2.2"
+            "version": "6.3.0"
           },
           {
             "name": "chalk",
@@ -2553,17 +2548,12 @@
           {
             "name": "compression",
             "purl": "",
-            "version": "1.8.1"
+            "version": "1.8.2"
           },
           {
             "name": "concat-map",
             "purl": "",
             "version": "0.0.1"
-          },
-          {
-            "name": "concat-stream",
-            "purl": "",
-            "version": "2.0.0"
           },
           {
             "name": "connect",
@@ -2573,7 +2563,7 @@
           {
             "name": "content-disposition",
             "purl": "",
-            "version": "1.0.1"
+            "version": "2.0.1"
           },
           {
             "name": "content-type",
@@ -2608,7 +2598,7 @@
           {
             "name": "core-js-compat",
             "purl": "",
-            "version": "3.50.0"
+            "version": "3.51.0"
           },
           {
             "name": "corepack",
@@ -2678,7 +2668,7 @@
           {
             "name": "defu",
             "purl": "",
-            "version": "6.1.4"
+            "version": "6.1.7"
           },
           {
             "name": "delayed-stream",
@@ -2733,7 +2723,7 @@
           {
             "name": "dotenv",
             "purl": "",
-            "version": "17.4.2"
+            "version": "18.0.9"
           },
           {
             "name": "dunder-proto",
@@ -2748,7 +2738,7 @@
           {
             "name": "electron-to-chromium",
             "purl": "",
-            "version": "1.5.425"
+            "version": "1.5.463"
           },
           {
             "name": "emoji-regex",
@@ -2793,7 +2783,7 @@
           {
             "name": "es-object-atoms",
             "purl": "",
-            "version": "1.1.1"
+            "version": "1.1.2"
           },
           {
             "name": "es-set-tostringtag",
@@ -2823,7 +2813,7 @@
           {
             "name": "eslint",
             "purl": "",
-            "version": "10.10.0"
+            "version": "10.13.0"
           },
           {
             "name": "eslint-compat-utils",
@@ -2838,12 +2828,12 @@
           {
             "name": "eslint-plugin-n",
             "purl": "",
-            "version": "18.3.0"
+            "version": "18.5.0"
           },
           {
             "name": "eslint-plugin-security",
             "purl": "",
-            "version": "4.0.1"
+            "version": "4.2.0"
           },
           {
             "name": "eslint-scope",
@@ -2918,17 +2908,17 @@
           {
             "name": "expo",
             "purl": "",
-            "version": "57.0.25"
+            "version": "57.0.31"
           },
           {
             "name": "expo-asset",
             "purl": "",
-            "version": "57.0.18"
+            "version": "57.0.20"
           },
           {
             "name": "expo-constants",
             "purl": "",
-            "version": "57.0.19"
+            "version": "57.0.22"
           },
           {
             "name": "expo-file-system",
@@ -2948,27 +2938,27 @@
           {
             "name": "expo-linking",
             "purl": "",
-            "version": "57.0.11"
+            "version": "57.0.13"
           },
           {
             "name": "expo-modules-autolinking",
             "purl": "",
-            "version": "57.0.13"
+            "version": "57.0.16"
           },
           {
             "name": "expo-modules-core",
             "purl": "",
-            "version": "57.0.19"
+            "version": "57.0.24"
           },
           {
             "name": "expo-modules-jsi",
             "purl": "",
-            "version": "57.1.1"
+            "version": "57.1.3"
           },
           {
             "name": "expo-network",
             "purl": "",
-            "version": "57.0.2"
+            "version": "57.0.3"
           },
           {
             "name": "expo-secure-store",
@@ -2988,7 +2978,7 @@
           {
             "name": "expo-widgets",
             "purl": "",
-            "version": "57.0.21"
+            "version": "57.0.27"
           },
           {
             "name": "exponential-backoff",
@@ -2998,7 +2988,7 @@
           {
             "name": "express",
             "purl": "",
-            "version": "5.2.1"
+            "version": "5.3.0"
           },
           {
             "name": "express-rate-limit",
@@ -3043,7 +3033,7 @@
           {
             "name": "fast-xml-parser",
             "purl": "",
-            "version": "5.11.1"
+            "version": "5.11.2"
           },
           {
             "name": "fb-dotslash",
@@ -3118,7 +3108,7 @@
           {
             "name": "form-data",
             "purl": "",
-            "version": "4.0.5"
+            "version": "4.0.6"
           },
           {
             "name": "formidable",
@@ -3243,7 +3233,7 @@
           {
             "name": "hasown",
             "purl": "",
-            "version": "2.0.2"
+            "version": "2.0.4"
           },
           {
             "name": "heic-convert",
@@ -3363,7 +3353,7 @@
           {
             "name": "is-core-module",
             "purl": "",
-            "version": "2.16.1"
+            "version": "2.17.0"
           },
           {
             "name": "is-docker",
@@ -3488,7 +3478,7 @@
           {
             "name": "jose",
             "purl": "",
-            "version": "6.2.12"
+            "version": "6.2.13"
           },
           {
             "name": "jpeg-js",
@@ -3558,7 +3548,7 @@
           {
             "name": "kysely",
             "purl": "",
-            "version": "0.29.5"
+            "version": "0.29.7"
           },
           {
             "name": "lan-network",
@@ -3673,7 +3663,7 @@
           {
             "name": "magicast",
             "purl": "",
-            "version": "0.5.4"
+            "version": "0.5.5"
           },
           {
             "name": "makeerror",
@@ -3833,7 +3823,7 @@
           {
             "name": "moment",
             "purl": "",
-            "version": "2.30.1"
+            "version": "2.31.0"
           },
           {
             "name": "mongodb",
@@ -3853,7 +3843,7 @@
           {
             "name": "multer",
             "purl": "",
-            "version": "2.3.0"
+            "version": "2.5.0"
           },
           {
             "name": "multitars",
@@ -3868,12 +3858,12 @@
           {
             "name": "nanoid",
             "purl": "",
-            "version": "3.3.18"
+            "version": "3.3.20"
           },
           {
             "name": "nanostores",
             "purl": "",
-            "version": "1.5.3"
+            "version": "1.5.5"
           },
           {
             "name": "natural-compare",
@@ -3898,7 +3888,7 @@
           {
             "name": "node-forge",
             "purl": "",
-            "version": "1.3.3"
+            "version": "1.4.0"
           },
           {
             "name": "node-int64",
@@ -3908,17 +3898,12 @@
           {
             "name": "node-releases",
             "purl": "",
-            "version": "2.0.55"
-          },
-          {
-            "name": "node-rsa",
-            "purl": "",
-            "version": "1.1.1"
+            "version": "2.0.60"
           },
           {
             "name": "nodemailer",
             "purl": "",
-            "version": "10.0.2"
+            "version": "10.2.1"
           },
           {
             "name": "nodemon",
@@ -3963,7 +3948,7 @@
           {
             "name": "obug",
             "purl": "",
-            "version": "2.2.1"
+            "version": "3.0.0"
           },
           {
             "name": "on-finished",
@@ -4078,22 +4063,22 @@
           {
             "name": "path-to-regexp",
             "purl": "",
-            "version": "8.3.0"
+            "version": "8.4.2"
           },
           {
             "name": "pg",
             "purl": "",
-            "version": "8.23.0"
+            "version": "8.23.1"
           },
           {
             "name": "pg-cloudflare",
             "purl": "",
-            "version": "1.4.0"
+            "version": "1.4.1"
           },
           {
             "name": "pg-connection-string",
             "purl": "",
-            "version": "2.14.0"
+            "version": "2.14.1"
           },
           {
             "name": "pg-format",
@@ -4113,7 +4098,7 @@
           {
             "name": "pg-protocol",
             "purl": "",
-            "version": "1.16.0"
+            "version": "1.16.1"
           },
           {
             "name": "pg-types",
@@ -4148,7 +4133,7 @@
           {
             "name": "plist",
             "purl": "",
-            "version": "3.1.0"
+            "version": "3.1.1"
           },
           {
             "name": "pngjs",
@@ -4158,7 +4143,7 @@
           {
             "name": "postcss",
             "purl": "",
-            "version": "8.5.28"
+            "version": "8.5.31"
           },
           {
             "name": "postgres-array",
@@ -4188,7 +4173,7 @@
           {
             "name": "prettier",
             "purl": "",
-            "version": "3.9.6"
+            "version": "3.9.10"
           },
           {
             "name": "pretty-format",
@@ -4218,7 +4203,7 @@
           {
             "name": "proxy-addr",
             "purl": "",
-            "version": "2.0.7"
+            "version": "2.0.8"
           },
           {
             "name": "proxy-agent-negotiate",
@@ -4248,7 +4233,7 @@
           {
             "name": "pvutils",
             "purl": "",
-            "version": "1.1.5"
+            "version": "1.2.0"
           },
           {
             "name": "qified",
@@ -4258,7 +4243,7 @@
           {
             "name": "qs",
             "purl": "",
-            "version": "6.14.2"
+            "version": "6.16.1"
           },
           {
             "name": "range-parser",
@@ -4273,7 +4258,7 @@
           {
             "name": "react",
             "purl": "",
-            "version": "19.2.3"
+            "version": "19.3.1"
           },
           {
             "name": "react-devtools-core",
@@ -4283,7 +4268,7 @@
           {
             "name": "react-dom",
             "purl": "",
-            "version": "19.2.3"
+            "version": "19.3.1"
           },
           {
             "name": "react-is",
@@ -4321,11 +4306,6 @@
             "version": "2.2.3"
           },
           {
-            "name": "readable-stream",
-            "purl": "",
-            "version": "3.6.2"
-          },
-          {
             "name": "readdirp",
             "purl": "",
             "version": "3.6.0"
@@ -4343,12 +4323,12 @@
           {
             "name": "regenerate",
             "purl": "",
-            "version": "1.4.2"
+            "version": "1.5.0"
           },
           {
             "name": "regenerate-unicode-properties",
             "purl": "",
-            "version": "10.2.2"
+            "version": "10.3.0"
           },
           {
             "name": "regenerator-runtime",
@@ -4363,7 +4343,7 @@
           {
             "name": "regexpu-core",
             "purl": "",
-            "version": "6.4.0"
+            "version": "6.5.3"
           },
           {
             "name": "regjsgen",
@@ -4373,7 +4353,7 @@
           {
             "name": "regjsparser",
             "purl": "",
-            "version": "0.13.0"
+            "version": "0.13.4"
           },
           {
             "name": "require-directory",
@@ -4388,7 +4368,7 @@
           {
             "name": "resolve",
             "purl": "",
-            "version": "1.22.12"
+            "version": "1.22.13"
           },
           {
             "name": "resolve-from",
@@ -4413,12 +4393,12 @@
           {
             "name": "rolldown",
             "purl": "",
-            "version": "1.2.8"
+            "version": "1.2.15"
           },
           {
             "name": "rou3",
             "purl": "",
-            "version": "0.7.12"
+            "version": "0.9.2"
           },
           {
             "name": "router",
@@ -4448,7 +4428,7 @@
           {
             "name": "samlify",
             "purl": "",
-            "version": "2.13.1"
+            "version": "2.15.1"
           },
           {
             "name": "sandbox-cli-detector",
@@ -4458,7 +4438,7 @@
           {
             "name": "sax",
             "purl": "",
-            "version": "1.5.0"
+            "version": "1.6.1"
           },
           {
             "name": "saxes",
@@ -4488,12 +4468,12 @@
           {
             "name": "seroval",
             "purl": "",
-            "version": "1.5.6"
+            "version": "1.6.12"
           },
           {
             "name": "seroval-plugins",
             "purl": "",
-            "version": "1.5.6"
+            "version": "1.6.12"
           },
           {
             "name": "serve-static",
@@ -4503,7 +4483,7 @@
           {
             "name": "set-cookie-parser",
             "purl": "",
-            "version": "3.0.1"
+            "version": "3.2.1"
           },
           {
             "name": "set-function-length",
@@ -4546,11 +4526,6 @@
             "version": "1.0.6"
           },
           {
-            "name": "siginfo",
-            "purl": "",
-            "version": "2.0.0"
-          },
-          {
             "name": "signal-exit",
             "purl": "",
             "version": "3.0.7"
@@ -4578,12 +4553,12 @@
           {
             "name": "slugify",
             "purl": "",
-            "version": "1.6.6"
+            "version": "1.6.9"
           },
           {
             "name": "solid-js",
             "purl": "",
-            "version": "1.9.13"
+            "version": "1.9.17"
           },
           {
             "name": "source-map",
@@ -4593,7 +4568,7 @@
           {
             "name": "source-map-js",
             "purl": "",
-            "version": "1.2.1"
+            "version": "1.2.2"
           },
           {
             "name": "source-map-support",
@@ -4603,7 +4578,7 @@
           {
             "name": "sparkyfitnessserver",
             "purl": "",
-            "version": "1.9.0"
+            "version": "1.10.0"
           },
           {
             "name": "sparse-bitfield",
@@ -4626,11 +4601,6 @@
             "version": "2.0.6"
           },
           {
-            "name": "stackback",
-            "purl": "",
-            "version": "0.0.2"
-          },
-          {
             "name": "stackframe",
             "purl": "",
             "version": "1.3.4"
@@ -4648,7 +4618,7 @@
           {
             "name": "std-env",
             "purl": "",
-            "version": "4.2.0"
+            "version": "4.3.0"
           },
           {
             "name": "stream-buffers",
@@ -4671,11 +4641,6 @@
             "version": "4.2.3"
           },
           {
-            "name": "string_decoder",
-            "purl": "",
-            "version": "1.3.0"
-          },
-          {
             "name": "strip-ansi",
             "purl": "",
             "version": "5.2.0"
@@ -4683,7 +4648,7 @@
           {
             "name": "strnum",
             "purl": "",
-            "version": "2.4.2"
+            "version": "2.5.1"
           },
           {
             "name": "structured-headers",
@@ -4698,7 +4663,7 @@
           {
             "name": "supertest",
             "purl": "",
-            "version": "7.2.2"
+            "version": "7.3.1"
           },
           {
             "name": "supports-color",
@@ -4763,12 +4728,12 @@
           {
             "name": "tinybench",
             "purl": "",
-            "version": "6.1.4"
+            "version": "6.2.2"
           },
           {
             "name": "tinyexec",
             "purl": "",
-            "version": "1.3.0"
+            "version": "1.3.1"
           },
           {
             "name": "tinyglobby",
@@ -4778,7 +4743,7 @@
           {
             "name": "tinyrainbow",
             "purl": "",
-            "version": "3.1.1"
+            "version": "3.2.0"
           },
           {
             "name": "tldts",
@@ -4843,7 +4808,7 @@
           {
             "name": "tsx",
             "purl": "",
-            "version": "4.23.13"
+            "version": "4.23.15"
           },
           {
             "name": "tsyringe",
@@ -4871,11 +4836,6 @@
             "version": "1.6.18"
           },
           {
-            "name": "typedarray",
-            "purl": "",
-            "version": "0.0.6"
-          },
-          {
             "name": "typescript",
             "purl": "",
             "version": "6.0.3"
@@ -4883,7 +4843,7 @@
           {
             "name": "typescript-eslint",
             "purl": "",
-            "version": "8.70.0"
+            "version": "8.72.0"
           },
           {
             "name": "undefsafe",
@@ -4893,12 +4853,12 @@
           {
             "name": "undici",
             "purl": "",
-            "version": "7.29.1"
+            "version": "7.30.1"
           },
           {
             "name": "undici-types",
             "purl": "",
-            "version": "7.24.6"
+            "version": "8.9.0"
           },
           {
             "name": "unicode-canonical-property-names-ecmascript",
@@ -4928,7 +4888,7 @@
           {
             "name": "update-browserslist-db",
             "purl": "",
-            "version": "1.3.2"
+            "version": "1.3.4"
           },
           {
             "name": "uri-js",
@@ -4946,11 +4906,6 @@
             "version": "1.1.3"
           },
           {
-            "name": "util-deprecate",
-            "purl": "",
-            "version": "1.0.2"
-          },
-          {
             "name": "utils-merge",
             "purl": "",
             "version": "1.0.1"
@@ -4958,7 +4913,7 @@
           {
             "name": "uuid",
             "purl": "",
-            "version": "14.0.2"
+            "version": "14.0.3"
           },
           {
             "name": "validate-npm-package-name",
@@ -4983,12 +4938,12 @@
           {
             "name": "vite",
             "purl": "",
-            "version": "8.3.0"
+            "version": "8.3.5"
           },
           {
             "name": "vitest",
             "purl": "",
-            "version": "5.0.0"
+            "version": "5.0.5"
           },
           {
             "name": "vlq",
@@ -5053,7 +5008,7 @@
           {
             "name": "why-is-node-running",
             "purl": "",
-            "version": "2.3.0"
+            "version": "3.2.1"
           },
           {
             "name": "word-wrap",
@@ -5083,7 +5038,7 @@
           {
             "name": "xcode",
             "purl": "",
-            "version": "3.0.1"
+            "version": "4.0.0"
           },
           {
             "name": "xml",
@@ -5093,7 +5048,7 @@
           {
             "name": "xml-crypto",
             "purl": "",
-            "version": "6.1.2"
+            "version": "6.4.0"
           },
           {
             "name": "xml-escape",
@@ -5128,7 +5083,7 @@
           {
             "name": "xpath",
             "purl": "",
-            "version": "0.0.32"
+            "version": "0.0.33"
           },
           {
             "name": "xtend",
@@ -5187,12 +5142,12 @@
         "freebsd": 63,
         "go": 0,
         "java": 0,
-        "node": 943,
+        "node": 934,
         "php": 0,
         "python": 0,
         "ruby": 0,
         "rust": 0,
-        "total": 1006
+        "total": 997
       }
     }
   }
