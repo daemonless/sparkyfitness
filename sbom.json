@@ -1,11 +1,11 @@
 {
-  "generated": "2026-10-29T07:08:44Z",
+  "generated": "2026-10-30T23:03:09Z",
   "image": "sparkyfitness",
   "tags": {
     "latest": {
-      "app_version": "v1.10.0",
+      "app_version": "v1.11.0",
       "arch": "amd64",
-      "generated": "2026-10-29T07:07:31Z",
+      "generated": "2026-10-30T23:01:51Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
@@ -976,12 +976,22 @@
             "version": "1.7.12"
           },
           {
+            "name": "@better-auth/mcp",
+            "purl": "",
+            "version": "1.7.12"
+          },
+          {
             "name": "@better-auth/memory-adapter",
             "purl": "",
             "version": "1.7.12"
           },
           {
             "name": "@better-auth/mongo-adapter",
+            "purl": "",
+            "version": "1.7.12"
+          },
+          {
+            "name": "@better-auth/oauth-provider",
             "purl": "",
             "version": "1.7.12"
           },
@@ -2123,7 +2133,7 @@
           {
             "name": "@workspace/shared",
             "purl": "",
-            "version": "1.10.0"
+            "version": "1.11.0"
           },
           {
             "name": "@xmldom/is-dom-node",
@@ -4578,7 +4588,7 @@
           {
             "name": "sparkyfitnessserver",
             "purl": "",
-            "version": "1.10.0"
+            "version": "1.11.0"
           },
           {
             "name": "sparse-bitfield",
@@ -5142,12 +5152,12 @@
         "freebsd": 63,
         "go": 0,
         "java": 0,
-        "node": 934,
+        "node": 936,
         "php": 0,
         "python": 0,
         "ruby": 0,
         "rust": 0,
-        "total": 997
+        "total": 999
       }
     }
   }
