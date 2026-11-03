@@ -1,11 +1,11 @@
 {
-  "generated": "2026-10-30T23:03:09Z",
+  "generated": "2026-11-03T15:51:59Z",
   "image": "sparkyfitness",
   "tags": {
     "latest": {
       "app_version": "v1.11.0",
       "arch": "amd64",
-      "generated": "2026-10-30T23:01:51Z",
+      "generated": "2026-11-03T15:50:46Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
@@ -389,7 +389,7 @@
               "MIT"
             ],
             "name": "node24",
-            "version": "24.21.0_3"
+            "version": "24.22.1"
           },
           {
             "licenses": [
@@ -439,7 +439,7 @@
               "PD"
             ],
             "name": "sqlite3",
-            "version": "3.53.4,1"
+            "version": "3.54.1,1"
           },
           {
             "licenses": [
