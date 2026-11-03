@@ -1,7 +1,13 @@
 #!/bin/sh
 echo "[init] Initializing SparkyFitness..."
 
-mkdir -p /uploads /backups
-chown -R bsd:bsd /uploads /backups
+# Prepare the dirs the server will actually use, resolved the way the server resolves them:
+# same variable precedence, relative paths against its working directory (/app/server).
+# Only the directories themselves are chowned; a user may point these at a shared mount.
+resolve() { case "$1" in /*) echo "$1" ;; *) echo "/app/server/$1" ;; esac; }
+UPLOADS_DIR=$(resolve "${SPARKY_FITNESS_CUSTOM_UPLOADS_DIRECTORY:-uploads}")
+BACKUPS_DIR=$(resolve "${SPARKY_FITNESS_CUSTOM_BACKUP_DIRECTORY:-${BACKUP_DIR:-backup}}")
+mkdir -p "$UPLOADS_DIR" "$BACKUPS_DIR"
+chown bsd:bsd "$UPLOADS_DIR" "$BACKUPS_DIR"
 
 echo "[init] Done"

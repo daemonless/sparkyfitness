@@ -86,13 +86,13 @@ LABEL org.opencontainers.image.title="SparkyFitness" \
       io.daemonless.upstream-url="${UPSTREAM_URL}" \
       io.daemonless.upstream-jq="${UPSTREAM_JQ}" \
       io.daemonless.healthcheck-url="${HEALTHCHECK_ENDPOINT}" \
-      io.daemonless.volumes="/uploads,/backups" \
+      io.daemonless.volumes="/app/server/uploads,/app/server/backup" \
       io.daemonless.packages="${PACKAGES}"
 
 # Install runtime dependencies
 RUN pkg update && \
     pkg install -y ${PACKAGES} && \
-    mkdir -p /app/server /app/client /uploads /backups \
+    mkdir -p /app/server /app/client \
              /var/log/nginx /var/run /var/tmp/nginx && \
     pkg clean -ay && \
     rm -rf /var/cache/pkg/* /var/db/pkg/repos/*
@@ -103,7 +103,8 @@ COPY --from=builder --chown=bsd:bsd /build/SparkyFitnessFrontend/dist /app/clien
 COPY --from=builder --chown=bsd:bsd /deploy /app/server
 
 # Set ownership — /app and /app/client need to be world-readable for nginx worker (www user)
-RUN chown -R bsd:bsd /app /uploads /backups && \
+RUN mkdir -p /app/server/uploads /app/server/backup && \
+    chown -R bsd:bsd /app && \
     chmod o+x /app && \
     chmod -R o+rX /app/client
 
@@ -114,9 +115,17 @@ RUN chmod +x /healthz
 
 WORKDIR /app
 
+# Pin the server's data dirs to the declared volumes. The values equal the app's defaults
+# (utils/uploadsPath.ts and services/backupService.ts resolve uploads/ and backup/ under
+# /app/server), so nothing changes today; if upstream moves those defaults, data still lands
+# in the declared volumes instead of the container layer. Backups are pinned through the
+# lowest-precedence variable (backupService.ts: SPARKY_FITNESS_CUSTOM_BACKUP_DIRECTORY, then
+# BACKUP_DIR, then the default), so a user's setting of either variable still wins.
 ENV NODE_ENV=production \
-    NODE_OPTIONS="--max-old-space-size=256"
+    NODE_OPTIONS="--max-old-space-size=256" \
+    SPARKY_FITNESS_CUSTOM_UPLOADS_DIRECTORY=/app/server/uploads \
+    BACKUP_DIR=/app/server/backup
 
 EXPOSE 3004
 
-VOLUME /uploads /backups
+VOLUME /app/server/uploads /app/server/backup
