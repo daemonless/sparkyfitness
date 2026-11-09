@@ -1,11 +1,11 @@
 {
-  "generated": "2026-11-04T14:06:47Z",
+  "generated": "2026-11-09T23:29:25Z",
   "image": "sparkyfitness",
   "tags": {
     "latest": {
-      "app_version": "v1.11.0",
+      "app_version": "v1.12.0",
       "arch": "amd64",
-      "generated": "2026-11-04T14:05:40Z",
+      "generated": "2026-11-09T23:28:18Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
@@ -923,7 +923,7 @@
           {
             "name": "@babel/preset-typescript",
             "purl": "",
-            "version": "7.28.5"
+            "version": "7.29.7"
           },
           {
             "name": "@babel/runtime",
@@ -2133,7 +2133,7 @@
           {
             "name": "@workspace/shared",
             "purl": "",
-            "version": "1.11.0"
+            "version": "1.12.0"
           },
           {
             "name": "@xmldom/is-dom-node",
@@ -4588,7 +4588,7 @@
           {
             "name": "sparkyfitnessserver",
             "purl": "",
-            "version": "1.11.0"
+            "version": "1.12.0"
           },
           {
             "name": "sparse-bitfield",
@@ -4891,6 +4891,11 @@
             "version": "2.2.0"
           },
           {
+            "name": "unpdf",
+            "purl": "",
+            "version": "1.9.1"
+          },
+          {
             "name": "unpipe",
             "purl": "",
             "version": "1.0.0"
@@ -5152,12 +5157,12 @@
         "freebsd": 63,
         "go": 0,
         "java": 0,
-        "node": 936,
+        "node": 937,
         "php": 0,
         "python": 0,
         "ruby": 0,
         "rust": 0,
-        "total": 999
+        "total": 1000
       }
     }
   }
